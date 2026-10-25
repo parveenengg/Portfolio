@@ -1797,22 +1797,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // --- BLOOMING MEADOW FLOWERS SYSTEM ---
-        const FLOWER_TYPES = ["daisy", "marigold", "cosmos", "lavender", "buttercup"];
+        const FLOWER_TYPES = ["daisy", "marigold", "cosmos", "lavender", "buttercup", "bluebell", "poppy"];
 
         function initMeadowFlowers() {
             meadowFlowers = [];
-            const count = Math.min(30, Math.max(14, Math.floor(width / 50)));
+            // Substantially increased flower density on the ground (~3x more flowers)
+            const count = Math.min(92, Math.max(45, Math.floor(width / 16)));
             for (let i = 0; i < count; i++) {
-                const layer = Math.random() > 0.4 ? 1 : 0;
+                const layer = Math.random() > 0.44 ? 1 : 0;
+                // 3 height tiers: low meadow blooms nestled in grass, mid wildflowers, tall statement blooms
+                const tier = Math.random();
+                let stemHeight, radius, stemWidth;
+                if (tier < 0.35) {
+                    stemHeight = (layer === 0 ? 38 : 52) + Math.random() * 22;
+                    radius = 6.5 + Math.random() * 3;
+                    stemWidth = 1.6;
+                } else if (tier < 0.75) {
+                    stemHeight = (layer === 0 ? 65 : 85) + Math.random() * 30;
+                    radius = 8.5 + Math.random() * 4;
+                    stemWidth = layer === 0 ? 2.0 : 2.5;
+                } else {
+                    stemHeight = (layer === 0 ? 95 : 125) + Math.random() * 35;
+                    radius = 10.5 + Math.random() * 4.5;
+                    stemWidth = layer === 0 ? 2.2 : 2.8;
+                }
+
+                // Natural organic jitter across the entire ground width
+                const jitter = (Math.random() - 0.5) * (width / count * 0.85);
                 meadowFlowers.push({
-                    x: (i / count) * width + (Math.random() - 0.5) * 22,
-                    stemHeight: (layer === 0 ? 55 : 85) + Math.random() * (layer === 0 ? 30 : 45),
-                    stemWidth: layer === 0 ? 2.0 : 2.6,
-                    speed: 1.0 + Math.random() * 0.7,
-                    amp: 8 + Math.random() * 12,
+                    x: Math.max(10, Math.min(width - 10, (i / count) * width + jitter)),
+                    stemHeight: stemHeight,
+                    stemWidth: stemWidth,
+                    speed: 0.85 + Math.random() * 0.8,
+                    amp: 6 + Math.random() * 11,
                     phase: Math.random() * Math.PI * 2,
                     type: FLOWER_TYPES[i % FLOWER_TYPES.length],
-                    radius: 8 + Math.random() * 5,
+                    radius: radius,
                     layer: layer
                 });
             }
@@ -1895,6 +1915,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.beginPath();
                 ctx.arc(0, 0, radius * 0.32, 0, Math.PI * 2);
                 ctx.fillStyle = "#EDE9FE";
+                ctx.fill();
+            } else if (type === "bluebell") {
+                const bells = 6;
+                for (let b = 0; b < bells; b++) {
+                    const rot = (b / bells) * Math.PI * 2;
+                    ctx.save();
+                    ctx.rotate(rot);
+                    ctx.beginPath();
+                    ctx.ellipse(0, -radius * 0.78, radius * 0.28, radius * 0.58, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = b % 2 === 0 ? "#60A5FA" : "#38BDF8";
+                    ctx.fill();
+                    ctx.restore();
+                }
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.32, 0, Math.PI * 2);
+                ctx.fillStyle = "#FFFDF0";
+                ctx.fill();
+            } else if (type === "poppy") {
+                const petals = 4;
+                for (let p = 0; p < petals; p++) {
+                    const rot = (p / petals) * Math.PI * 2;
+                    ctx.save();
+                    ctx.rotate(rot);
+                    ctx.beginPath();
+                    ctx.ellipse(0, -radius * 0.7, radius * 0.55, radius * 0.65, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = p % 2 === 0 ? "#F87171" : "#EF4444";
+                    ctx.fill();
+                    ctx.restore();
+                }
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.38, 0, Math.PI * 2);
+                ctx.fillStyle = "#451A03";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.18, 0, Math.PI * 2);
+                ctx.fillStyle = "#FEF08A";
                 ctx.fill();
             } else {
                 const petals = 5;
