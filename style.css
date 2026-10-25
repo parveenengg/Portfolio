@@ -1,52 +1,2689 @@
-* {
+/* ==========================================================================
+   PORTFOLIO V5 — THE LIVING GARDEN
+   Artistic Nature-Inspired Interactive Experience
+   Parveen Makwana (Legal & Academic Record: Parveen Kumar)
+   "Shaped by where I came from, defined by what I build."
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. DESIGN TOKENS & SYSTEM VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+    /* Daylight Nature Palette (Default) */
+    --sky-gradient-top: #EBF4F6;
+    --sky-gradient-mid: #FAF5EF;
+    --sky-gradient-bottom: #EAF3EC;
+    --ground-base: #F7FAF6;
+    --ground-soil: #ECE8DD;
+
+    --bg-base: #FAF8F5;
+    --bg-surface: rgba(255, 255, 255, 0.72);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-solid: #FFFFFF;
+    --bg-card-hover: rgba(255, 255, 255, 0.96);
+
+    /* Text Tiers */
+    --text-primary: #18231E;
+    --text-muted: #41524A;
+    --text-subtle: #6D8277;
+    --text-inverse: #FFFFFF;
+
+    /* Botanical Color System */
+    --flora-emerald: #2E7D5A;
+    --flora-emerald-hover: #236548;
+    --flora-emerald-soft: rgba(46, 125, 90, 0.09);
+    --flora-emerald-glow: rgba(46, 125, 90, 0.22);
+
+    --flora-sage: #4EA87E;
+    --flora-mint: #68C498;
+    --flora-dew: rgba(104, 196, 152, 0.15);
+
+    /* Flower System */
+    --flora-marigold: #F59E0B;
+    --flora-marigold-deep: #D97706;
+    --flora-marigold-soft: rgba(245, 158, 11, 0.12);
+    --flora-marigold-glow: rgba(245, 158, 11, 0.28);
+
+    --flora-cosmos: #EC4899;
+    --flora-cosmos-deep: #DB2777;
+    --flora-cosmos-soft: rgba(236, 72, 153, 0.10);
+    --flora-cosmos-glow: rgba(236, 72, 153, 0.25);
+
+    --flora-daisy: #FFFBEB;
+    --flora-daisy-gold: #FBBF24;
+    --flora-daisy-border: rgba(251, 191, 36, 0.35);
+
+    --flora-wildflower: #6366F1;
+    --flora-wildflower-soft: rgba(99, 102, 241, 0.10);
+
+    --flora-brass: #C28B38;
+    --flora-brass-glow: rgba(194, 139, 56, 0.25);
+
+    /* Borders & Subtle Frames */
+    --border-card: rgba(46, 125, 90, 0.12);
+    --border-card-hover: rgba(46, 125, 90, 0.32);
+    --border-hairline: rgba(24, 35, 30, 0.06);
+
+    /* Shadows */
+    --shadow-subtle: 0 4px 20px -2px rgba(27, 48, 36, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-card: 0 12px 35px -8px rgba(27, 48, 36, 0.06), 0 0 1px rgba(46, 125, 90, 0.15);
+    --shadow-elevated: 0 22px 50px -12px rgba(46, 125, 90, 0.14), 0 2px 8px rgba(27, 48, 36, 0.04);
+    --shadow-blossom: 0 10px 30px -5px rgba(245, 158, 11, 0.2);
+
+    /* Typography */
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+    --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+
+    /* Geometry & Timing */
+    --container-max: 1240px;
+    --radius-sm: 8px;
+    --radius-btn: 12px;
+    --radius-card: 18px;
+    --radius-pill: 9999px;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Twilight Mode (Data-Theme = Dark)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+    --sky-gradient-top: #080D14;
+    --sky-gradient-mid: #0E1724;
+    --sky-gradient-bottom: #0A121A;
+    --ground-base: #0B141C;
+    --ground-soil: #16202B;
+
+    --bg-base: #0A1118;
+    --bg-surface: rgba(14, 23, 34, 0.75);
+    --bg-card: rgba(16, 26, 38, 0.88);
+    --bg-card-solid: #121E2C;
+    --bg-card-hover: rgba(22, 35, 50, 0.95);
+
+    --text-primary: #F0F6F3;
+    --text-muted: #9BB0A5;
+    --text-subtle: #687E74;
+    --text-inverse: #080D14;
+
+    --flora-emerald: #34D399;
+    --flora-emerald-hover: #10B981;
+    --flora-emerald-soft: rgba(52, 211, 153, 0.12);
+    --flora-emerald-glow: rgba(52, 211, 153, 0.35);
+
+    --flora-sage: #6EE7B7;
+    --flora-mint: #A7F3D0;
+    --flora-dew: rgba(110, 231, 183, 0.2);
+
+    --flora-marigold: #FBBF24;
+    --flora-marigold-deep: #F59E0B;
+    --flora-marigold-soft: rgba(251, 191, 36, 0.15);
+    --flora-marigold-glow: rgba(251, 191, 36, 0.35);
+
+    --flora-cosmos: #F472B6;
+    --flora-cosmos-deep: #EC4899;
+    --flora-cosmos-soft: rgba(244, 114, 182, 0.15);
+    --flora-cosmos-glow: rgba(244, 114, 182, 0.32);
+
+    --flora-daisy: #FEF3C7;
+    --flora-daisy-gold: #FDE68A;
+    --flora-daisy-border: rgba(253, 230, 138, 0.35);
+
+    --flora-wildflower: #818CF8;
+    --flora-wildflower-soft: rgba(129, 140, 248, 0.15);
+
+    --flora-brass: #E0A64C;
+    --flora-brass-glow: rgba(224, 166, 76, 0.32);
+
+    --border-card: rgba(52, 211, 153, 0.18);
+    --border-card-hover: rgba(52, 211, 153, 0.45);
+    --border-hairline: rgba(240, 246, 243, 0.08);
+
+    --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 12px 35px -8px rgba(0, 0, 0, 0.6), 0 0 1px rgba(52, 211, 153, 0.25);
+    --shadow-elevated: 0 22px 50px -12px rgba(0, 0, 0, 0.75), 0 0 1px rgba(52, 211, 153, 0.4);
+    --shadow-blossom: 0 10px 30px -5px rgba(251, 191, 36, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   02. RESET & BASE ARCHITECTURE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body, html {
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    background-color: #0f1115; /* Clean dark background */
-    color: #ffffff;
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.garden-body {
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    transition: color 0.4s ease;
+}
+
+[data-theme="dark"] body.garden-body {
+    background: transparent;
+}
+
+/* Atmospheric Canvas Layer: Visible Sky & Ground */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   BESPOKE ARTISTIC FLOWER CURSOR
+   Delicate 5-Petal Botanical Flower with Golden Pollen Center
+   -------------------------------------------------------------------------- */
+.garden-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.garden-cursor.is-active {
+    opacity: 1;
+}
+
+.cursor-flower {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    margin-top: -19px;
+    margin-left: -19px;
+    pointer-events: none;
     display: flex;
+    align-items: center;
     justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35));
+}
+
+.flower-petal {
+    position: absolute;
+    width: 13px;
+    height: 19px;
+    border-radius: 50% 50% 38% 38%;
+    background: linear-gradient(180deg, #FFFDF5 0%, #FDE68A 45%, #F59E0B 100%);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    transform-origin: center bottom;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+}
+
+/* 5 radial petals positioned around center */
+.petal-0 { transform: translateY(-8px) rotate(0deg); }
+.petal-1 { transform: translateY(-8px) rotate(72deg); }
+.petal-2 { transform: translateY(-8px) rotate(144deg); }
+.petal-3 { transform: translateY(-8px) rotate(216deg); }
+.petal-4 { transform: translateY(-8px) rotate(288deg); }
+
+.flower-center {
+    position: relative;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FDE047 0%, #EA580C 100%);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.9);
+    z-index: 2;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+/* Hovering over clickable interactive elements: flower blooms and glows! */
+.garden-cursor.is-hovering .cursor-flower {
+    transform: scale(1.35) rotate(36deg);
+    filter: drop-shadow(0 4px 14px rgba(236, 72, 153, 0.45));
+}
+
+.garden-cursor.is-hovering .flower-petal {
+    background: linear-gradient(180deg, #FFF0F5 0%, #F472B6 55%, #DB2777 100%);
+    border-color: rgba(236, 72, 153, 0.5);
+}
+
+.garden-cursor.is-hovering .flower-center {
+    transform: scale(1.25);
+    background: radial-gradient(circle at 35% 35%, #FEF08A 0%, #F59E0B 100%);
+    box-shadow: 0 0 12px rgba(251, 191, 36, 0.95);
+}
+
+/* Clicking / Active touch feedback: playful bounce */
+.garden-cursor.is-clicking .cursor-flower {
+    transform: scale(0.85) rotate(-24deg);
+}
+
+.garden-cursor.is-clicking .flower-center {
+    transform: scale(0.8);
+}
+
+/* Trailing floating pollen particle */
+.pollen-mote {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999998;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.85) 0%, rgba(46, 125, 90, 0.45) 100%);
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+    animation: pollenFloat 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes pollenFloat {
+    0% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--drift-x, 0px)), calc(-50% - 24px)) scale(0.2);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   CURSOR FLOWER TRAIL: SUSPENDED & FALLING BOTANICAL BLOOMS
+   Leaves blooming flowers behind that suspend, then gracefully fall to ground
+   -------------------------------------------------------------------------- */
+.cursor-flower-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999997; /* Immediately beneath active cursor, floats above page content */
+    overflow: hidden;
+}
+
+.trail-defs-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.trail-flower-node {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    user-select: none;
+    contain: layout style paint;
+}
+
+.trail-flower-node svg {
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.22));
+}
+
+/* Floral Repel Shockwave Ripple Effect on non-CTA Clicks */
+.flower-repel-ripple {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.2);
+    border: 2px solid rgba(245, 158, 11, 0.7);
+    box-shadow: 0 0 16px rgba(236, 72, 153, 0.45), inset 0 0 12px rgba(253, 224, 71, 0.35);
+    animation: flowerRippleBurst 0.65s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes flowerRippleBurst {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.8);
+        opacity: 0;
+    }
+}
+
+@media (pointer: fine) {
+    body.garden-body,
+    body.garden-body a,
+    body.garden-body button,
+    body.garden-body input,
+    body.garden-body [role="button"],
+    body.garden-body .dock-btn,
+    body.garden-body .dock-link,
+    body.garden-body .tag-pill,
+    body.garden-body .card-frame,
+    body.garden-body .shortcut-pill {
+        cursor: none !important;
+    }
+}
+
+@media (pointer: coarse), (hover: none) {
+    .garden-cursor, .pollen-mote, .cursor-flower-trail {
+        display: none !important;
+    }
+}
+
+.garden-container,
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   03. CARD FRAME & STEPPED BOTANICAL MOTIFS
+   -------------------------------------------------------------------------- */
+.card-frame {
+    position: relative;
+    background: var(--bg-card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.35s var(--ease-out-expo),
+                transform 0.35s var(--ease-out-expo),
+                box-shadow 0.35s var(--ease-out-expo),
+                background-color 0.35s ease;
+}
+
+.card-frame:hover {
+    border-color: var(--border-card-hover);
+    box-shadow: var(--shadow-elevated);
+}
+
+/* Stepped corner accents representing architectural baoli & geometric leaves */
+.card-corner-motif {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.card-corner-motif::before,
+.card-corner-motif::after {
+    content: '';
+    position: absolute;
+    background: var(--flora-emerald);
+    opacity: 0.55;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.card-corner-motif.top-left { top: 7px; left: 7px; }
+.card-corner-motif.top-left::before { top: 0; left: 0; width: 8px; height: 1.5px; }
+.card-corner-motif.top-left::after { top: 0; left: 0; width: 1.5px; height: 8px; }
+
+.card-corner-motif.top-right { top: 7px; right: 7px; }
+.card-corner-motif.top-right::before { top: 0; right: 0; width: 8px; height: 1.5px; }
+.card-corner-motif.top-right::after { top: 0; right: 0; width: 1.5px; height: 8px; }
+
+.card-corner-motif.bottom-left { bottom: 7px; left: 7px; }
+.card-corner-motif.bottom-left::before { bottom: 0; left: 0; width: 8px; height: 1.5px; }
+.card-corner-motif.bottom-left::after { bottom: 0; left: 0; width: 1.5px; height: 8px; }
+
+.card-corner-motif.bottom-right { bottom: 7px; right: 7px; }
+.card-corner-motif.bottom-right::before { bottom: 0; right: 0; width: 8px; height: 1.5px; }
+.card-corner-motif.bottom-right::after { bottom: 0; right: 0; width: 1.5px; height: 8px; }
+
+.card-frame:hover .card-corner-motif::before,
+.card-frame:hover .card-corner-motif::after {
+    opacity: 0.95;
+    background: var(--flora-marigold);
+}
+
+/* --------------------------------------------------------------------------
+   04. FLOATING MINIMAL NATURE DOCK (Zero Traditional Navbar / Footer)
+   -------------------------------------------------------------------------- */
+.garden-floating-dock {
+    position: fixed;
+    top: 1.15rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border-card);
+    box-shadow: 0 10px 30px -4px rgba(27, 48, 36, 0.1), 0 0 1px rgba(46, 125, 90, 0.2);
+    width: max-content;
+    max-width: calc(100vw - 2rem);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.garden-floating-dock:hover {
+    border-color: var(--border-card-hover);
+    box-shadow: 0 14px 40px -6px rgba(27, 48, 36, 0.14), 0 0 2px var(--flora-emerald);
+}
+
+/* Botanical Monogram Brand */
+.dock-garden-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.15);
+    transition: all 0.25s ease;
+}
+
+.dock-garden-brand:hover {
+    background: var(--flora-emerald);
+    color: var(--text-inverse);
+    border-color: var(--flora-emerald);
+}
+
+.dock-sprout-svg {
+    stroke: var(--flora-emerald);
+    transition: stroke 0.25s ease, transform 0.3s var(--ease-spring);
+}
+
+.dock-garden-brand:hover .dock-sprout-svg {
+    stroke: var(--text-inverse);
+    transform: scale(1.15) rotate(6deg);
+}
+
+.dock-brand-name {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+}
+
+/* Dock Navigation Links Row */
+.dock-links-row {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.dock-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-radius: var(--radius-pill);
+    transition: all 0.2s ease;
+}
+
+.dock-link-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-subtle);
+    opacity: 0.4;
+    transition: all 0.25s var(--ease-spring);
+}
+
+.dock-link:hover {
+    color: var(--text-primary);
+    background: var(--flora-emerald-soft);
+}
+
+.dock-link:hover .dock-link-dot {
+    background: var(--flora-emerald);
+    opacity: 0.9;
+    transform: scale(1.25);
+}
+
+.dock-link.is-active {
+    color: var(--flora-emerald);
+    background: var(--flora-emerald-soft);
+    font-weight: 600;
+}
+
+.dock-link.is-active .dock-link-dot {
+    background: var(--flora-emerald);
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px var(--flora-emerald-glow);
+}
+
+/* System Controls Row */
+.dock-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0.4rem;
+    border-left: 1px solid var(--border-hairline);
+}
+
+/* Mode Switch: Garden vs CLI */
+.dock-mode-switch {
+    display: inline-flex;
+    background: rgba(24, 35, 30, 0.05);
+    border: 1px solid var(--border-hairline);
+    padding: 2px;
+    border-radius: var(--radius-pill);
+    gap: 2px;
+}
+
+.dock-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out-expo);
+}
+
+.dock-btn:hover {
+    color: var(--text-primary);
+}
+
+.dock-btn.is-active {
+    background: var(--bg-card-solid);
+    color: var(--flora-emerald);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dock-btn-icon {
+    font-size: 0.85rem;
+}
+
+/* Util Buttons */
+.dock-util-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.28rem 0.6rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-hairline);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dock-util-btn:hover {
+    background: var(--flora-emerald-soft);
+    color: var(--text-primary);
+    border-color: var(--border-card);
+}
+
+.dock-util-btn.is-active {
+    background: var(--flora-emerald-soft);
+    border-color: var(--flora-emerald);
+    color: var(--flora-emerald);
+}
+
+/* Rohtak IST Live Clock Capsule */
+.dock-clock-capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.15);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--flora-emerald);
+}
+
+.clock-pin-icon {
+    animation: leafPulse 2s infinite ease-in-out;
+}
+
+/* Mobile 3-Dots Menu Button */
+.dock-mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-card);
+    background: var(--bg-card-solid);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s var(--ease-spring);
+    box-shadow: var(--shadow-subtle);
+}
+
+.dock-mobile-menu-btn:hover,
+.dock-mobile-menu-btn[aria-expanded="true"] {
+    background: var(--flora-emerald);
+    color: var(--text-inverse);
+    border-color: var(--flora-emerald);
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(46, 125, 90, 0.35);
+}
+
+/* Mobile Dropdown Navigation Drawer Sheet */
+.mobile-nav-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 10005;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.mobile-nav-drawer.is-open {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 20, 15, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+}
+
+.mobile-nav-sheet {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 380px;
+    margin-top: 4.5rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-card);
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 1px var(--flora-emerald);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transform: translateY(-16px) scale(0.96);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.mobile-nav-drawer.is-open .mobile-nav-sheet {
+    transform: translateY(0) scale(1);
+}
+
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-hairline);
+}
+
+.mobile-brand-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+}
+
+.badge-dot-sm {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--flora-emerald);
+    box-shadow: 0 0 8px var(--flora-emerald);
+}
+
+.mobile-nav-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hairline);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-close:hover {
+    background: var(--flora-rose-soft);
+    color: var(--flora-rose);
+    border-color: var(--flora-rose);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.mobile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.is-active {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border-color: rgba(46, 125, 90, 0.2);
+    transform: translateX(4px);
+}
+
+.mobile-nav-item .m-nav-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.mobile-nav-divider {
+    height: 1px;
+    background: var(--border-hairline);
+    margin: 0.2rem 0;
+}
+
+.mobile-social-pills {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.mobile-social-pill {
+    flex: 1;
+    min-width: 90px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.65rem;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card-solid);
+    border: 1px solid var(--border-hairline);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.mobile-social-pill:hover {
+    border-color: var(--flora-emerald);
+    color: var(--flora-emerald);
+    transform: translateY(-2px);
+}
+
+.mobile-aux-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.mobile-aux-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-hairline);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobile-aux-btn:hover,
+.mobile-aux-btn.is-active {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border-color: var(--flora-emerald);
+}
+
+/* --------------------------------------------------------------------------
+   05. NATURE-INSPIRED BUTTON SYSTEM (Softly Rounded-Square + Petal Interactions)
+   -------------------------------------------------------------------------- */
+.garden-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.82rem 1.6rem;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s var(--ease-spring);
+}
+
+.garden-btn .btn-icon {
+    font-size: 1.05rem;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.garden-btn .btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.garden-btn:hover .btn-icon {
+    transform: scale(1.18) rotate(6deg);
+}
+
+.garden-btn:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Leaf Primary (Emerald Gradient with Blossom Lift) */
+.btn-leaf-primary {
+    background: linear-gradient(135deg, var(--flora-emerald) 0%, #1E5C41 100%);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px -4px var(--flora-emerald-glow);
+}
+
+.btn-leaf-primary:hover {
+    background: linear-gradient(135deg, var(--flora-sage) 0%, var(--flora-emerald) 100%);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -4px var(--flora-emerald-glow);
+}
+
+.btn-leaf-primary:active {
+    transform: translateY(0);
+}
+
+/* Petal Ghost (Frosted Glass + Delicate Floral Outline) */
+.btn-petal-ghost {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-subtle);
+}
+
+.btn-petal-ghost:hover {
+    border-color: var(--flora-cosmos);
+    color: var(--flora-cosmos-deep);
+    background: var(--flora-cosmos-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -4px var(--flora-cosmos-glow);
+}
+
+/* Seed Subtle (Earthy Neutral Pill) */
+.btn-seed-subtle {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-hairline);
+}
+
+.btn-seed-subtle:hover {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border-color: var(--border-card);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   06. HERO SECTION: THE SKY & MEADOW INITIATION
+   -------------------------------------------------------------------------- */
+.garden-hero-section {
+    position: relative;
+    min-height: 94vh;
+    padding-top: 7.5rem;
+    padding-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    scroll-margin-top: 5.5rem;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+}
+
+/* Atmospheric Header & Floral Eyebrow */
+.hero-atmospheric-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: flex-start;
+}
+
+.floral-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.35rem 0.95rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.18);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--flora-emerald);
+}
+
+.flower-icon {
+    animation: gentleSway 4s ease-in-out infinite;
+}
+
+.flower-marigold {
+    animation-delay: -2s;
+}
+
+.hero-identity-statement {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.hero-greeting {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.hero-name-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7.5vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+}
+
+.hero-legal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: rgba(24, 35, 30, 0.04);
+    border: 1px solid var(--border-hairline);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    width: fit-content;
+    margin-top: 0.25rem;
+}
+
+.legal-tag-label {
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+}
+
+.legal-tag-val {
+    color: var(--flora-emerald);
+    font-weight: 700;
+}
+
+/* Poetic Motto Center (Instrument Serif Editorial Core) */
+.hero-poetic-center {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 860px;
+}
+
+.hero-motto-display {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    line-height: 1.12;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+}
+
+.motto-italic {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.motto-accent {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--flora-emerald) 0%, var(--flora-marigold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 400;
+}
+
+.hero-description {
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 720px;
+}
+
+.hero-actions-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Seedling Terminal Capsule */
+.hero-seedling-terminal {
+    max-width: 860px;
+    padding: 1.2rem 1.4rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+}
+
+.terminal-flora-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-hairline);
+    margin-bottom: 0.85rem;
+}
+
+.flora-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot-petal {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.petal-rose { background: var(--flora-cosmos); }
+.petal-amber { background: var(--flora-marigold); }
+.petal-leaf { background: var(--flora-emerald); }
+
+.flora-bar-title {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-subtle);
+}
+
+.flora-status-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--flora-emerald);
+}
+
+.flora-terminal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.flora-term-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.cli-prompt-symbol {
+    color: var(--flora-emerald);
+    font-weight: 700;
+}
+
+.cli-term-cmd {
+    color: var(--flora-marigold);
+    font-weight: 600;
+}
+
+.cli-term-out {
+    color: var(--text-muted);
+}
+
+.highlight-bloom {
+    color: var(--flora-emerald);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   07. SECTION FLORA HEADINGS (Shared Heading Language)
+   -------------------------------------------------------------------------- */
+.garden-section {
+    padding: 6.5rem 0;
+    position: relative;
+    z-index: 1;
+    scroll-margin-top: 5.5rem;
+}
+
+.section-flora-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    max-width: 820px;
+    margin-bottom: 3.5rem;
+}
+
+.heading-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.16);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--flora-emerald);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+}
+
+.serif-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.serif-bloom {
+    color: var(--flora-emerald);
+    text-decoration: underline;
+    text-decoration-color: rgba(46, 125, 90, 0.3);
+    text-underline-offset: 6px;
+}
+
+.section-subtitle {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 740px;
+}
+
+/* --------------------------------------------------------------------------
+   09. CULTIVATED WORKS (Curated Shipped Projects Grid)
+   -------------------------------------------------------------------------- */
+.projects-botanical-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.botanical-project-card {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s var(--ease-out-expo), border-color 0.35s ease;
+}
+
+.botanical-project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elevated);
+    border-color: var(--border-card-hover);
+}
+
+.project-media-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #0E1620;
+    border: 1px solid var(--border-card);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.botanical-project-card:hover .project-card-image {
+    transform: scale(1.04);
+}
+
+.project-info-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+    flex-grow: 1;
+}
+
+.project-heading {
+    font-family: var(--font-display);
+    font-size: 1.32rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-primary);
+}
+
+.project-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     align-items: center;
 }
 
-.container {
+.project-links-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.project-links-row .garden-btn {
+    flex: 1;
+    justify-content: center;
     text-align: center;
-    padding: 2rem;
-    max-width: 800px;
-    width: 100%;
+    padding: 0.65rem 1rem;
+    font-size: 0.88rem;
 }
 
-h1 {
-    font-size: 3rem;
+/* --------------------------------------------------------------------------
+   10. LIVING ECOSYSTEM (Tech Toolkit & Capabilities)
+   -------------------------------------------------------------------------- */
+.ecosystem-branches-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.ecosystem-card {
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.branch-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+}
+
+.branch-blossom {
+    font-size: 1.85rem;
+    line-height: 1;
+    display: inline-block;
+    animation: gentleSway 5s ease-in-out infinite;
+}
+
+.branch-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.branch-tier {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--flora-emerald);
 }
 
-p {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: #a0a0a0;
-    margin-bottom: 3rem;
+.branch-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-primary);
 }
 
-.video-wrapper {
+.branch-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.branch-skills-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: auto;
+}
+
+.skill-tag {
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background: rgba(24, 35, 30, 0.05);
+    border: 1px solid var(--border-hairline);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border-color: var(--flora-emerald);
+    transform: translateY(-1px);
+}
+
+.highlight-skill {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border-color: var(--border-card);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   11. THE GROWTH PATHWAY: MULTILAYER CHRONOLOGY VINE
+   -------------------------------------------------------------------------- */
+.growth-pathway-vine {
+    --vine-line-x: 22px;
+    --vine-indent: 64px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-left: var(--vine-indent);
+}
+
+/* Botanical Vine Stem Line (Runs straight down the center of all circle nodes) */
+.growth-pathway-vine::before {
+    content: '';
+    position: absolute;
+    top: 1.25rem;
+    bottom: 2rem;
+    left: var(--vine-line-x);
+    transform: translateX(-50%);
+    width: 3px;
+    background: linear-gradient(180deg, var(--flora-emerald) 0%, var(--flora-sage) 60%, var(--flora-mint) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 8px var(--flora-emerald-glow);
+}
+
+.vine-node-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    border-radius: 12px;
+}
+
+/* Subtle botanical horizontal branch connecting vine node directly to the card */
+.vine-node-item::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--vine-line-x) - var(--vine-indent));
+    top: 2rem;
+    width: calc(var(--vine-indent) - var(--vine-line-x));
+    height: 2px;
+    background: linear-gradient(90deg, var(--flora-emerald) 0%, rgba(46, 125, 90, 0.25) 100%);
+    z-index: 1;
+}
+
+/* Blossom Marker - EXACTLY centered on the vertical vine stem line */
+.vine-blossom-marker {
+    position: absolute;
+    left: calc(var(--vine-line-x) - var(--vine-indent));
+    top: 2rem;
+    transform: translate(-50%, -50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--bg-card-solid);
+    border: 2.5px solid var(--flora-emerald);
+    box-shadow: 0 0 12px var(--flora-emerald-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: transform 0.3s var(--ease-spring), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blossom-marker-icon {
+    font-size: 1.05rem;
+    line-height: 1;
+    user-select: none;
+}
+
+.vine-node-item:hover .vine-blossom-marker {
+    transform: translate(-50%, -50%) scale(1.15);
+    border-color: var(--flora-marigold);
+    box-shadow: 0 0 16px var(--flora-marigold-glow);
+}
+
+.blossom-active {
+    border-color: var(--flora-cosmos);
+    background: var(--flora-cosmos-soft);
+    box-shadow: 0 0 14px var(--flora-cosmos-glow);
+}
+
+.blossom-horizon {
+    border-color: var(--flora-wildflower);
+    background: var(--flora-wildflower-soft);
+}
+
+/* Vine Content Card: 0 margin-left ensures no overlap with the stem */
+.vine-content-card {
+    padding: 1.75rem 2rem;
+    cursor: pointer;
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.vine-content-card.is-highlighted {
+    border-color: rgba(46, 125, 90, 0.4);
+    box-shadow: var(--shadow-elevated);
+}
+
+.node-meta-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.node-badge-cluster {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.node-year-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--flora-emerald);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.25);
+    padding: 0.22rem 0.65rem;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+}
+
+.node-track-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.22rem 0.6rem;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+}
+
+.badge-education {
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border: 1px solid rgba(46, 125, 90, 0.2);
+}
+
+.badge-projects {
+    background: var(--flora-marigold-soft);
+    color: var(--flora-marigold-deep);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-experience {
+    background: var(--flora-cosmos-soft);
+    color: var(--flora-cosmos-deep);
+    border: 1px solid rgba(236, 72, 153, 0.25);
+}
+
+.badge-horizon {
+    background: var(--flora-wildflower-soft);
+    color: var(--flora-wildflower);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.node-place {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-subtle);
+}
+
+.node-headline {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.node-summary {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+.node-skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.node-skill-tags span {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    background: rgba(24, 35, 30, 0.05);
+    color: var(--text-subtle);
+}
+
+.node-explore-link {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    color: var(--flora-emerald);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.vine-content-card:hover .node-explore-link {
+    transform: translateX(4px);
+    color: var(--flora-marigold-deep);
+}
+
+/* --------------------------------------------------------------------------
+   12. THE CONSERVATORY (Contact & Direct Verified Comms)
+   -------------------------------------------------------------------------- */
+.conservatory-frame {
+    padding: 3rem;
+}
+
+.conservatory-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.conservatory-intro-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.conservatory-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.conservatory-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* 1-Click Email Card */
+.direct-email-card {
+    margin-top: 0.75rem;
+    padding: 1.25rem 1.4rem;
+    border-radius: var(--radius-sm);
+    background: var(--flora-emerald-soft);
+    border: 1px solid var(--border-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.email-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--flora-emerald);
+}
+
+.email-display-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.email-anchor {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.email-anchor:hover {
+    color: var(--flora-emerald);
+}
+
+.copy-btn {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.82rem;
+}
+
+/* Verified Digital Profiles */
+.conservatory-relays-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.relays-header-title {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+}
+
+.garden-relays-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.garden-relay-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.95rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card-solid);
+    border: 1px solid var(--border-hairline);
+    text-decoration: none;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-subtle);
+    transition: all 0.25s var(--ease-spring);
+}
+
+.garden-relay-card:hover {
+    border-color: var(--border-card-hover);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-card);
+}
+
+.relay-icon-wrap {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.relay-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.relay-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.relay-handle {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-subtle);
+}
+
+.relay-arrow {
+    font-size: 1.1rem;
+    color: var(--text-subtle);
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.garden-relay-card:hover .relay-arrow {
+    transform: translate(2px, -2px);
+    color: var(--flora-emerald);
+}
+
+#relay-card-linkedin:hover .relay-arrow {
+    color: #0A66C2;
+}
+
+#relay-card-github:hover .relay-arrow {
+    color: #10B981;
+}
+
+#relay-card-leetcode:hover .relay-arrow {
+    color: #FFA116;
+}
+
+#relay-card-instagram:hover .relay-arrow {
+    color: #E1306C;
+}
+
+/* Station Telemetry Bar */
+.station-telemetry-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(24, 35, 30, 0.04);
+    border: 1px solid var(--border-hairline);
+    margin-top: 0.5rem;
+}
+
+.telemetry-item {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+
+.t-k {
+    color: var(--text-subtle);
+    margin-right: 0.35rem;
+}
+
+.t-v {
+    color: var(--flora-emerald);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   13. DEVELOPER TERMINAL CLI (Mode 02: Full Screen Fidelity)
+   -------------------------------------------------------------------------- */
+.terminal-view-section {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 6.5rem;
+    padding-bottom: 3.5rem;
+    z-index: 2;
+}
+
+.terminal-view-container {
+    max-width: 1040px;
+}
+
+.terminal-screen {
+    background: #0B1118;
+    color: #DDE5EC;
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: var(--radius-card);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    background: #000;
+}
+
+.terminal-window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.1rem;
+    background: #101924;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.window-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.ctrl-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.dot-red { background: #FF5F56; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #27C93F; }
+
+.terminal-bar-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #8C9CAE;
+}
+
+.terminal-right-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.terminal-bar-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #34D399;
+}
+
+.terminal-switch-gui-btn {
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    color: #34D399;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.terminal-switch-gui-btn:hover {
+    background: #34D399;
+    color: #0B1118;
+}
+
+.terminal-viewport {
+    padding: 1.5rem;
+    min-height: 480px;
+    max-height: 65vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.terminal-ascii-art {
+    color: #34D399;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    white-space: pre;
+    opacity: 0.9;
+}
+
+.terminal-welcome-msg {
+    color: #8C9CAE;
+    font-size: 0.84rem;
+}
+
+.term-code-cmd {
+    color: #FBBF24;
+    background: rgba(251, 191, 36, 0.1);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+}
+
+.terminal-output-buffer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.term-entry-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.term-entered-cmd {
+    color: #34D399;
+    font-weight: 600;
+}
+
+.term-entered-out {
+    color: #CCD7E2;
+}
+
+.terminal-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.term-prompt-user {
+    color: #34D399;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.term-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.term-submit-btn {
+    background: rgba(52, 211, 153, 0.15);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    color: #34D399;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
     cursor: pointer;
 }
 
-#main-video {
+.term-submit-btn:hover {
+    background: #34D399;
+    color: #0B1118;
+}
+
+.terminal-shortcuts-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.1rem;
+    background: #0E1620;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+}
+
+.shortcuts-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #6C7D8F;
+    white-space: nowrap;
+}
+
+.shortcuts-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.shortcut-pill {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #8C9CAE;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.shortcut-pill:hover {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34D399;
+    border-color: #34D399;
+}
+
+.shortcut-pill-gui {
+    color: #34D399;
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   14. MODALS (Accessible Milestone Detail & Identity Snapshot)
+   -------------------------------------------------------------------------- */
+.milestone-modal,
+.profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.milestone-modal.is-open,
+.profile-modal.is-open {
+    display: flex;
+}
+
+.milestone-modal-backdrop,
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(8, 14, 20, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.milestone-modal-window,
+.modal-window {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 680px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--bg-card-solid);
+    border-radius: var(--radius-card);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4);
+    animation: modalScaleIn 0.3s var(--ease-spring);
+}
+
+.modal-head,
+.m-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.6rem 0.75rem 1.6rem;
+}
+
+.modal-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.badge-dot-lg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--flora-emerald);
+}
+
+.modal-name {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.modal-tag {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--flora-emerald);
+    background: var(--flora-emerald-soft);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-pill);
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--text-subtle);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--flora-cosmos);
+}
+
+.modal-body-content,
+.m-modal-body {
+    padding: 0 1.6rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.modal-lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--flora-emerald);
+}
+
+.modal-spec-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    background: rgba(24, 35, 30, 0.03);
+}
+
+.m-spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--border-hairline);
+}
+
+.m-spec:last-child {
+    border-bottom: none;
+}
+
+.highlight-legal-row {
+    background: var(--flora-emerald-soft);
+    padding: 0.45rem 0.5rem;
+    border-radius: 4px;
+}
+
+.m-k {
+    color: var(--text-subtle);
+}
+
+.m-v {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.highlight-jade {
+    color: var(--flora-emerald);
+}
+
+.modal-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* Milestone Modal Specs */
+.m-modal-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.m-badge-track {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    font-weight: 600;
+}
+
+.m-badge-period,
+.m-badge-id {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-subtle);
+}
+
+.m-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.m-modal-org {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--flora-emerald);
+}
+
+.m-modal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.m-section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+}
+
+.m-modal-summary,
+.m-modal-details {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+.m-modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.m-tag {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    background: var(--flora-emerald-soft);
+    color: var(--flora-emerald);
+    border: 1px solid var(--border-card);
+}
+
+.m-modal-preview-wrap {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    max-height: 240px;
+    border: 1px solid var(--border-hairline);
+}
+
+.m-modal-preview-img {
+    width: 100%;
+    height: auto;
     display: block;
-    outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   15. MICRO-ANIMATIONS & AMBIENT MOTION
+   -------------------------------------------------------------------------- */
+@keyframes gentleSway {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(4deg) translateY(-1px);
+    }
+    75% {
+        transform: rotate(-3deg) translateY(1px);
+    }
+}
+
+@keyframes blossomBreathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px var(--flora-emerald-glow);
+    }
+    50% {
+        transform: scale(1.22);
+        box-shadow: 0 0 18px var(--flora-emerald-glow);
+    }
+}
+
+@keyframes leafPulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes modalScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   16. RESPONSIVE BREAKPOINTS (Fluid Desktop, Laptop, Tablet & Mobile)
+   -------------------------------------------------------------------------- */
+/* Large Laptops & Medium Desktops (<= 1280px) */
+@media (max-width: 1280px) {
+    .dock-clock-capsule {
+        display: none;
+    }
+
+    .garden-floating-dock {
+        gap: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Laptops & Tablets Landscape (<= 1080px) */
+@media (max-width: 1080px) {
+    .dock-util-label {
+        display: none;
+    }
+
+    .dock-links-row {
+        gap: 0.15rem;
+    }
+
+    .dock-link {
+        padding: 0.32rem 0.55rem;
+        font-size: 0.78rem;
+    }
+
+    .projects-botanical-grid {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+        margin: 0 auto;
+        gap: 2rem;
+    }
+
+    .ecosystem-branches-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .conservatory-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* Tablets Portrait & Large Phones (<= 768px) */
+@media (max-width: 768px) {
+    .garden-floating-dock {
+        top: 0.85rem;
+        bottom: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100vw - 1.5rem);
+        max-width: 440px;
+        padding: 0.4rem 0.85rem;
+        gap: 0.6rem;
+        justify-content: space-between;
+        box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 0 1px rgba(52, 211, 153, 0.4);
+        z-index: 10000;
+    }
+
+    .dock-garden-brand {
+        display: inline-flex;
+        padding: 0.25rem 0.55rem;
+        font-size: 0.82rem;
+    }
+
+    /* Hide horizontal link row in favor of 3-dots menu on mobile */
+    .dock-links-row {
+        display: none !important;
+    }
+
+    .dock-controls-row {
+        border-left: none;
+        padding-left: 0;
+        gap: 0.35rem;
+    }
+
+    .dock-mode-switch {
+        display: none;
+    }
+
+    .dock-util-btn {
+        padding: 0.3rem 0.5rem;
+    }
+
+    .dock-util-btn .dock-util-label {
+        display: none;
+    }
+
+    .dock-clock-capsule {
+        display: none;
+    }
+
+    /* Show 3-Dots Menu Button */
+    .dock-mobile-menu-btn {
+        display: inline-flex;
+    }
+
+    .garden-hero-section {
+        min-height: auto;
+        padding-top: 3rem;
+        padding-bottom: 4.5rem;
+        scroll-margin-top: 2rem;
+    }
+
+    .hero-name-title {
+        font-size: clamp(2.3rem, 7.5vw, 3.8rem);
+        word-break: break-word;
+    }
+
+    .hero-motto-display {
+        font-size: clamp(1.8rem, 5.5vw, 2.75rem);
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-legal-tag {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+        font-size: 0.72rem;
+    }
+
+    .hero-actions-cluster {
+        gap: 0.65rem;
+    }
+
+    .hero-actions-cluster .garden-btn {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+
+    .hero-seedling-terminal {
+        padding: 1rem 1.15rem;
+    }
+
+    .flora-term-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+        word-break: break-word;
+    }
+
+    .garden-section {
+        padding: 4.5rem 0;
+        scroll-margin-top: 2rem;
+    }
+
+    .section-flora-heading {
+        margin-bottom: 2.25rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.85rem, 6vw, 2.6rem);
+    }
+
+    .section-subtitle {
+        font-size: 0.98rem;
+    }
+
+    .ecosystem-branches-grid {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+    }
+
+    .growth-pathway-vine {
+        --vine-line-x: 18px;
+        --vine-indent: 52px;
+        gap: 1.75rem;
+    }
+
+    .vine-blossom-marker {
+        width: 32px;
+        height: 32px;
+    }
+
+    .blossom-marker-icon {
+        font-size: 0.85rem;
+    }
+
+    .vine-content-card {
+        margin-left: 0;
+        padding: 1.35rem 1.25rem;
+    }
+
+    .conservatory-frame {
+        padding: 1.6rem 1.25rem;
+    }
+
+    .direct-email-card {
+        padding: 1.1rem;
+    }
+
+    .email-display-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .email-anchor {
+        font-size: 0.92rem;
+        word-break: break-all;
+        text-align: center;
+    }
+
+    .copy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modal-window,
+    .milestone-modal-window {
+        width: 95vw;
+        max-height: 88vh;
+        padding: 1.25rem 1rem;
+    }
+}
+
+/* Small Phones (<= 480px) */
+@media (max-width: 480px) {
+    .garden-container,
+    .container {
+        padding: 0 1rem;
+    }
+
+    .growth-pathway-vine {
+        --vine-line-x: 14px;
+        --vine-indent: 42px;
+    }
+
+    .vine-blossom-marker {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dock-mobile-menu-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1.3rem;
+    }
+
+    .hero-greeting {
+        font-size: 0.92rem;
+    }
+
+    .hero-name-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-motto-display {
+        font-size: 1.7rem;
+    }
+
+    .botanical-project-card {
+        padding: 1.15rem;
+    }
+
+    .project-media-frame {
+        aspect-ratio: 16 / 10;
+        max-height: 220px;
+    }
+
+    .project-heading {
+        font-size: 1.15rem;
+    }
+
+    .project-links-row {
+        flex-direction: column;
+    }
+
+    .project-links-row .garden-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

@@ -1,25 +1,1111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Coming Soon</title>
+    <title>Parveen Makwana (Parveen Kumar) — The Living Garden &bull; Software Engineering Portfolio</title>
+    <meta name="description"
+        content="The Living Garden Portfolio of Parveen Makwana (Parveen Kumar) — Software Engineer based in Rohtak, Haryana, building cross-platform engines (Flutter/Dart), backend APIs (Node/Express/MongoDB), and Python data tools.">
+
+    <!-- Google Fonts: Instrument Serif, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <main class="container">
-        <h1>Coming Soon</h1>
-        <p>I'm currently working on something awesome. Check back shortly.</p>
-        
-        <div class="video-wrapper" id="video-wrapper">
-            <video id="main-video" controls>
-                <source src="MyVideo1.mp4" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
+
+<body class="garden-body">
+
+    <!-- Bespoke Interactive Living Garden Flower Cursor -->
+    <div id="garden-cursor" class="garden-cursor" aria-hidden="true">
+        <div class="cursor-flower">
+            <span class="flower-petal petal-0"></span>
+            <span class="flower-petal petal-1"></span>
+            <span class="flower-petal petal-2"></span>
+            <span class="flower-petal petal-3"></span>
+            <span class="flower-petal petal-4"></span>
+            <span class="flower-center"></span>
         </div>
+    </div>
+
+    <!-- Cursor Trail: Suspended & Falling Garden Flowers Overlay Layer -->
+    <div id="cursor-flower-trail" class="cursor-flower-trail" aria-hidden="true">
+        <svg class="trail-defs-svg" aria-hidden="true">
+            <defs>
+                <radialGradient id="trail-grad-sakura" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFF5F8" />
+                    <stop offset="65%" stop-color="#F472B6" />
+                    <stop offset="100%" stop-color="#DB2777" />
+                </radialGradient>
+                <radialGradient id="trail-grad-marigold" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFFBEB" />
+                    <stop offset="60%" stop-color="#FBBF24" />
+                    <stop offset="100%" stop-color="#D97706" />
+                </radialGradient>
+                <radialGradient id="trail-grad-cosmos" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FDF2F8" />
+                    <stop offset="60%" stop-color="#EC4899" />
+                    <stop offset="100%" stop-color="#BE185D" />
+                </radialGradient>
+                <radialGradient id="trail-grad-daisy" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="70%" stop-color="#F3F4F6" />
+                    <stop offset="100%" stop-color="#E2E8F0" />
+                </radialGradient>
+                <radialGradient id="trail-grad-lavender" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FAF5FF" />
+                    <stop offset="65%" stop-color="#C084FC" />
+                    <stop offset="100%" stop-color="#7E22CE" />
+                </radialGradient>
+                <radialGradient id="trail-grad-peach" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFF7ED" />
+                    <stop offset="65%" stop-color="#FB923C" />
+                    <stop offset="100%" stop-color="#EA580C" />
+                </radialGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Living Atmospheric Sky, Drifting Clouds & Floating Petals Canvas -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- FLOATING MINIMAL GARDEN DOCK (No Traditional Navbar / Footer) -->
+    <div class="garden-floating-dock card-frame" id="system-hud" role="navigation"
+        aria-label="Garden System Navigation">
+        <!-- Botanical Monogram Emblem -->
+        <a href="#hero" class="dock-garden-brand" aria-label="Return to Garden Hero">
+            <svg class="dock-sprout-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 20h10" />
+                <path d="M10 20c0-4 1-8 6-9" />
+                <path d="M12 20c0-6 2-10 8-10" />
+                <path d="M14 6c0 3-2 5-5 5-2 0-3-1-3-3 0-3 3-5 6-5 2 0 2 2 2 3z" />
+            </svg>
+            <span class="dock-brand-name">Parveen M.</span>
+        </a>
+
+        <!-- Primary Navigation Anchors -->
+        <div class="dock-links-row" role="menubar">
+            <a href="#hero" class="dock-link is-active" role="menuitem">
+                <span class="dock-link-dot"></span><span>Home</span>
+            </a>
+            <a href="#projects" class="dock-link" role="menuitem">
+                <span class="dock-link-dot"></span><span>Projects</span>
+            </a>
+            <a href="#toolkit" class="dock-link" role="menuitem">
+                <span class="dock-link-dot"></span><span>Skills</span>
+            </a>
+            <a href="#timeline" class="dock-link" role="menuitem">
+                <span class="dock-link-dot"></span><span>Timeline</span>
+            </a>
+            <a href="#contact" class="dock-link" role="menuitem">
+                <span class="dock-link-dot"></span><span>Contact</span>
+            </a>
+        </div>
+
+        <!-- System & Sensory Controls -->
+        <div class="dock-controls-row">
+            <!-- Mode Toggle (Garden GUI vs Terminal CLI) -->
+            <div class="dock-mode-switch" id="view-mode-toggle" role="group" aria-label="View Mode">
+                <button type="button" class="dock-btn is-active" id="btn-mode-modern" data-mode="modern"
+                    title="Living Garden GUI">
+                    <span class="dock-btn-icon">🌸</span>
+                    <span class="dock-btn-txt">GUI</span>
+                </button>
+                <button type="button" class="dock-btn" id="btn-mode-terminal" data-mode="terminal"
+                    title="Developer Terminal CLI [T]">
+                    <span class="dock-btn-icon">&gt;_</span>
+                    <span class="dock-btn-txt">CLI</span>
+                </button>
+            </div>
+
+            <!-- Calm Garden Ambient Music & Soft Clicks Toggle -->
+            <button class="dock-util-btn" id="sound-toggle-btn" type="button"
+                aria-label="Toggle Calm Garden Music & Touch Audio [M]"
+                title="Calm Garden Music &amp; Soft Touch Sounds (Click to toggle)">
+                <span id="sound-icon">🎵</span>
+                <span class="dock-util-label" id="sound-label">Music Off</span>
+            </button>
+
+            <!-- Theme Switcher (Daylight / Twilight) -->
+            <button class="dock-util-btn" id="theme-toggle-btn" type="button"
+                aria-label="Toggle Daylight / Twilight Light" title="Toggle Nature Lighting">
+                <span id="theme-icon">🌓</span>
+                <span class="dock-util-label">Light</span>
+            </button>
+
+            <!-- Quick Profile Snapshot Modal Trigger -->
+            <button class="dock-util-btn" id="header-snapshot-btn" type="button"
+                aria-label="View Developer Seedling Dossier">
+                <span class="dock-util-icon">🌿</span>
+                <span class="dock-util-label">Identity</span>
+            </button>
+
+            <!-- Rohtak IST Live Clock -->
+            <div class="dock-clock-capsule" title="Rohtak Local Timezone (UTC+5:30)">
+                <span class="clock-pin-icon">&bull;</span>
+                <span class="clock-display-text" id="dock-clock-display">--:--:-- IST</span>
+            </div>
+
+            <!-- Mobile 3-Dots Menu Button (Visible on Mobile <= 768px) -->
+            <button class="dock-mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open Navigation Menu"
+                aria-expanded="false" title="Menu">
+                <span class="three-dots-icon">⋮</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation Drawer (Accessible Modal Sheet) -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-label="Navigation Menu">
+        <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+        <div class="mobile-nav-sheet card-frame">
+            <div class="mobile-nav-header">
+                <div class="mobile-brand-pill">
+                    <span class="badge-dot-sm"></span>
+                    <strong>Parveen Makwana</strong>
+                </div>
+                <button class="mobile-nav-close" id="mobile-nav-close" type="button"
+                    aria-label="Close navigation menu">&times;</button>
+            </div>
+            <nav class="mobile-nav-links" aria-label="Mobile Sections">
+                <a href="#hero" class="mobile-nav-item is-active" data-section="hero">
+                    <span class="m-nav-icon">🏡</span>
+                    <span class="m-nav-text">Home</span>
+                </a>
+                <a href="#projects" class="mobile-nav-item" data-section="projects">
+                    <span class="m-nav-icon">💼</span>
+                    <span class="m-nav-text">Projects</span>
+                </a>
+                <a href="#toolkit" class="mobile-nav-item" data-section="toolkit">
+                    <span class="m-nav-icon">⚡</span>
+                    <span class="m-nav-text">Skills</span>
+                </a>
+                <a href="#timeline" class="mobile-nav-item" data-section="timeline">
+                    <span class="m-nav-icon">🌱</span>
+                    <span class="m-nav-text">Timeline</span>
+                </a>
+                <a href="#contact" class="mobile-nav-item" data-section="contact">
+                    <span class="m-nav-icon">✉️</span>
+                    <span class="m-nav-text">Contact</span>
+                </a>
+            </nav>
+            <div class="mobile-nav-divider"></div>
+            <div class="mobile-nav-actions">
+                <div class="mobile-social-pills">
+                    <a href="https://linkedin.com/in/parveenkumar--/" target="_blank" rel="noopener"
+                        class="mobile-social-pill">
+                        <span>💼 LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/parveenengg" target="_blank" rel="noopener" class="mobile-social-pill">
+                        <span>🐙 GitHub</span>
+                    </a>
+                    <a href="https://leetcode.com/u/parveen_engi/" target="_blank" rel="noopener" class="mobile-social-pill">
+                        <span>⚡ LeetCode</span>
+                    </a>
+                    <a href="https://www.instagram.com/parveen.tv/" target="_blank" rel="noopener"
+                        class="mobile-social-pill">
+                        <span>📸 Instagram</span>
+                    </a>
+                </div>
+                <div class="mobile-aux-row">
+                    <button type="button" class="mobile-aux-btn" id="m-sound-btn">
+                        <span id="m-sound-icon">🎵</span>
+                        <span id="m-sound-txt">Music Off</span>
+                    </button>
+                    <button type="button" class="mobile-aux-btn" id="m-terminal-btn">
+                        <span>&gt;_ Developer CLI</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN GARDEN CONTENT FLOW -->
+    <main id="main-content" class="garden-main-flow">
+
+        <!-- =================================================================
+             01. HERO EXPERIENCE: THE SKY & MEADOW INITIATION
+             ================================================================= -->
+        <section class="garden-hero-section" id="hero">
+            <div class="garden-container hero-container">
+
+                <!-- Sky Atmospheric Greeting & Floral Eyebrow -->
+                <div class="hero-atmospheric-header">
+                    <div class="floral-eyebrow">
+                        <svg class="flower-icon flower-daisy" width="18" height="18" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <circle cx="12" cy="12" r="4" fill="#F59E0B" />
+                            <path
+                                d="M12 2a3 3 0 0 0-3 3v2a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM12 17a3 3 0 0 0-3 3v2a3 3 0 0 0 6 0v-2a3 3 0 0 0-3-3zM2 12a3 3 0 0 0 3 3h2a3 3 0 0 0 0-6H5a3 3 0 0 0-3 3zM17 12a3 3 0 0 0 3 3h2a3 3 0 0 0 0-6h-2a3 3 0 0 0-3 3z"
+                                opacity="0.85" />
+                        </svg>
+                        <span class="eyebrow-text">THE LIVING DIGITAL GARDEN &bull; ROHTAK, HARYANA</span>
+                        <svg class="flower-icon flower-marigold" width="18" height="18" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <circle cx="12" cy="12" r="4" fill="#D97706" />
+                            <path
+                                d="M12 3a2 2 0 0 1 2 2v2a2 2 0 0 1-4 0V5a2 2 0 0 1 2-2zM12 17a2 2 0 0 1 2 2v2a2 2 0 0 1-4 0v-2a2 2 0 0 1 2-2zM3 12a2 2 0 0 1 2-2h2a2 2 0 0 1 0 4H5a2 2 0 0 1-2-2zM17 12a2 2 0 0 1 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-2-2z"
+                                opacity="0.85" />
+                        </svg>
+                    </div>
+
+                    <div class="hero-identity-statement">
+                        <span class="hero-greeting">Welcome to the software landscape of</span>
+                        <h1 class="hero-name-title">Parveen Makwana</h1>
+                        <div class="hero-legal-tag">
+                            <span class="legal-tag-label">DOCUMENTED ACADEMIC &amp; LEGAL RECORD:</span>
+                            <strong class="legal-tag-val">Parveen Kumar</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Central Poetic Motto (Instrument Serif Editorial Core) -->
+                <div class="hero-poetic-center">
+                    <p class="hero-motto-display">
+                        <span class="motto-italic">&ldquo;Shaped by where I came from,</span><br>
+                        <span class="motto-accent">defined by what I build.&rdquo;</span>
+                    </p>
+                    <p class="hero-description">
+                        I am a Software Engineer cultivating cross-platform client engines, resilient backend
+                        architectures, and data-driven systems. Growing software with structural craftsmanship,
+                        authentic curiosity, and execution precision.
+                    </p>
+
+                    <!-- Garden Action Triggers -->
+                    <div class="hero-actions-cluster">
+                        <a href="#projects" class="garden-btn btn-leaf-primary">
+                            <span class="btn-icon">🌿</span>
+                            <span>Explore Cultivated Works</span>
+                            <span class="btn-arrow">&darr;</span>
+                        </a>
+                        <a href="#timeline" class="garden-btn btn-petal-ghost">
+                            <span class="btn-icon">🌸</span>
+                            <span>The Growth Pathway</span>
+                            <span class="btn-arrow">&rarr;</span>
+                        </a>
+                        <a href="#contact" class="garden-btn btn-seed-subtle">
+                            <span class="btn-icon">✉</span>
+                            <span>Direct Channel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Living Garden Seedling Terminal Capsule -->
+                <div class="hero-seedling-terminal card-frame" aria-label="Seedling Command Capsule">
+                    <div class="card-corner-motif top-left"></div>
+                    <div class="card-corner-motif top-right"></div>
+                    <div class="card-corner-motif bottom-left"></div>
+                    <div class="card-corner-motif bottom-right"></div>
+
+                    <div class="terminal-flora-bar">
+                        <div class="flora-dots">
+                            <span class="dot-petal petal-rose"></span>
+                            <span class="dot-petal petal-amber"></span>
+                            <span class="dot-petal petal-leaf"></span>
+                        </div>
+                        <span class="flora-bar-title">seedling // parveen-botanical-profile.env</span>
+                        <span class="flora-status-badge status-flourishing">● FLOURISHING &bull; SDE '27</span>
+                    </div>
+
+                    <div class="flora-terminal-body">
+                        <div class="flora-term-row">
+                            <span class="cli-prompt-symbol">$</span>
+                            <span class="cli-term-cmd">whoami</span>
+                            <span class="cli-term-out">&rarr; Parveen Makwana (Parveen Kumar) &bull; Software
+                                Engineer</span>
+                        </div>
+                        <div class="flora-term-row">
+                            <span class="cli-prompt-symbol">$</span>
+                            <span class="cli-term-cmd">cat readiness.json</span>
+                            <span class="cli-term-out highlight-bloom">&rarr; { "status": "Open to SDE Internships &amp;
+                                Entry-Level Roles", "location": "Rohtak / Remote" }</span>
+                        </div>
+                        <div class="flora-term-row">
+                            <span class="cli-prompt-symbol">$</span>
+                            <span class="cli-term-cmd">cat core-disciplines.sys</span>
+                            <span class="cli-term-out">&rarr; [ "Flutter / Dart (Client)", "Node.js (Server)", "Python
+                                (Data)", "JavaScript (Web)" ]</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <!-- =================================================================
+             03. CULTIVATED SOFTWARE BUILDS (CURATED PROJECTS)
+             ================================================================= -->
+        <section class="garden-section projects-section" id="projects">
+            <div class="garden-container">
+
+                <div class="section-flora-heading">
+                    <div class="heading-tag">
+                        <span class="tag-leaf-icon">🌸</span>
+                        <span class="tag-text">BOTANICAL WORKS &bull; SHIPPED SOFTWARE</span>
+                    </div>
+                    <h2 class="section-title">
+                        Cultivated software <span class="serif-title serif-bloom">builds</span> &amp; living systems.
+                    </h2>
+                    <p class="section-subtitle">
+                        Selected software builds. Visit the live deployment or view source code on GitHub.
+                    </p>
+                </div>
+
+                <div class="projects-botanical-grid">
+
+                    <!-- PROJECT 01: Orbit Browser -->
+                    <article class="botanical-project-card card-frame" id="project-orbit">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+                        <div class="card-corner-motif bottom-left"></div>
+                        <div class="card-corner-motif bottom-right"></div>
+
+                        <div class="project-media-frame">
+                            <img src="assets/project-orbit.jpg" alt="Orbit Browser Interface" class="project-card-image"
+                                loading="lazy">
+                        </div>
+
+                        <div class="project-info-body">
+                            <h3 class="project-heading">Orbit &mdash; Cross-Platform Browser</h3>
+
+                            <div class="project-tech-stack">
+                                <span class="skill-tag highlight-skill">Flutter</span>
+                                <span class="skill-tag highlight-skill">Dart</span>
+                                <span class="skill-tag">SQLite</span>
+                                <span class="skill-tag">Android APK</span>
+                            </div>
+
+                            <div class="project-links-row">
+                                <a href="https://orbit.parveenmakwana.in/" target="_blank"
+                                    rel="noopener" class="garden-btn btn-leaf-primary">
+                                    <span>Live Site &nearr;</span>
+                                </a>
+                                <a href="https://github.com/parveenengg/Orbit-app" target="_blank" rel="noopener"
+                                    class="garden-btn btn-petal-ghost">
+                                    <span>GitHub &nearr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- PROJECT 02: Obvious-Choice -->
+                    <article class="botanical-project-card card-frame" id="project-obvious">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+                        <div class="card-corner-motif bottom-left"></div>
+                        <div class="card-corner-motif bottom-right"></div>
+
+                        <div class="project-media-frame">
+                            <img src="assets/project-obvious.jpg" alt="Obvious-Choice Platform Interface"
+                                class="project-card-image" loading="lazy">
+                        </div>
+
+                        <div class="project-info-body">
+                            <h3 class="project-heading">Obvious-Choice &mdash; Founder Digital Platform</h3>
+
+                            <div class="project-tech-stack">
+                                <span class="skill-tag highlight-skill">Vanilla JS</span>
+                                <span class="skill-tag highlight-skill">Modern CSS</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">Lighthouse 99+</span>
+                            </div>
+
+                            <div class="project-links-row">
+                                <a href="https://obvious-choice.parveenmakwana.in/" target="_blank" rel="noopener"
+                                    class="garden-btn btn-leaf-primary">
+                                    <span>Live Platform &nearr;</span>
+                                </a>
+                                <a href="https://github.com/parveenengg/ObviousChoice" target="_blank" rel="noopener"
+                                    class="garden-btn btn-petal-ghost">
+                                    <span>GitHub &nearr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             04. THE LIVING ECOSYSTEM (TECH TOOLKIT & CAPABILITIES)
+             ================================================================= -->
+        <section class="garden-section toolkit-section" id="toolkit">
+            <div class="garden-container">
+
+                <div class="section-flora-heading">
+                    <div class="heading-tag">
+                        <span class="tag-leaf-icon">🌿</span>
+                        <span class="tag-text">ECOSYSTEM &amp; DISCIPLINES</span>
+                    </div>
+                    <h2 class="section-title">
+                        The living <span class="serif-title serif-bloom">ecosystem</span> of tools and abilities.
+                    </h2>
+                    <p class="section-subtitle">
+                        Technologies organized like a thriving garden ecosystem: from deep soil logic to client
+                        canopies. Select any branch to inspect capabilities and real-world implementations.
+                    </p>
+                </div>
+
+                <!-- 4 Flourishing Ecosystem Branches -->
+                <div class="ecosystem-branches-grid">
+
+                    <!-- Branch 01: Client & Mobile Canopy -->
+                    <div class="ecosystem-card card-frame" id="branch-client">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+
+                        <div class="branch-head">
+                            <span class="branch-blossom blossom-cosmos">🌸</span>
+                            <div class="branch-meta">
+                                <span class="branch-tier">BRANCH 01 // CLIENT CANOPY</span>
+                                <h3 class="branch-name">Cross-Platform &amp; Mobile UI</h3>
+                            </div>
+                        </div>
+
+                        <p class="branch-desc">
+                            Crafting 60 FPS compile-to-native experiences across mobile and desktop. Powers Orbit
+                            Browser MVP with custom gesture virtualizations.
+                        </p>
+
+                        <div class="branch-skills-cluster">
+                            <span class="skill-tag highlight-skill">Flutter</span>
+                            <span class="skill-tag highlight-skill">Dart</span>
+                            <span class="skill-tag">Material 3</span>
+                            <span class="skill-tag">Android SDK</span>
+                            <span class="skill-tag">macOS Packaging</span>
+                            <span class="skill-tag">State Management</span>
+                        </div>
+                    </div>
+
+                    <!-- Branch 02: Server & Cloud Soil -->
+                    <div class="ecosystem-card card-frame" id="branch-server">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+
+                        <div class="branch-head">
+                            <span class="branch-blossom blossom-marigold">🌼</span>
+                            <div class="branch-meta">
+                                <span class="branch-tier">BRANCH 02 // SERVER SOIL</span>
+                                <h3 class="branch-name">Backend APIs &amp; Microservices</h3>
+                            </div>
+                        </div>
+
+                        <p class="branch-desc">
+                            Architecting event-driven RESTful backends, authentication gates, routing pipelines, and
+                            secure API middleware with Node.js and Express.
+                        </p>
+
+                        <div class="branch-skills-cluster">
+                            <span class="skill-tag highlight-skill">Node.js</span>
+                            <span class="skill-tag highlight-skill">Express.js</span>
+                            <span class="skill-tag">RESTful APIs</span>
+                            <span class="skill-tag">JWT Auth</span>
+                            <span class="skill-tag">Middleware</span>
+                            <span class="skill-tag">HTTP Protocols</span>
+                        </div>
+                    </div>
+
+                    <!-- Branch 03: Persistence & Data Roots -->
+                    <div class="ecosystem-card card-frame" id="branch-data">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+
+                        <div class="branch-head">
+                            <span class="branch-blossom blossom-wildflower">🌾</span>
+                            <div class="branch-meta">
+                                <span class="branch-tier">BRANCH 03 // DATA ROOTS</span>
+                                <h3 class="branch-name">Persistence &amp; Python Analytics</h3>
+                            </div>
+                        </div>
+
+                        <p class="branch-desc">
+                            Dual storage mastery: low-latency SQLite tables for client performance alongside flexible
+                            cloud MongoDB document clusters and Python data tools.
+                        </p>
+
+                        <div class="branch-skills-cluster">
+                            <span class="skill-tag highlight-skill">MongoDB</span>
+                            <span class="skill-tag highlight-skill">SQLite</span>
+                            <span class="skill-tag highlight-skill">Python</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">Data Cleaning</span>
+                        </div>
+                    </div>
+
+                    <!-- Branch 04: Foundational Core Logic -->
+                    <div class="ecosystem-card card-frame" id="branch-core">
+                        <div class="card-corner-motif top-left"></div>
+                        <div class="card-corner-motif top-right"></div>
+
+                        <div class="branch-head">
+                            <span class="branch-blossom blossom-daisy">🍃</span>
+                            <div class="branch-meta">
+                                <span class="branch-tier">BRANCH 04 // CORE ARCHITECTURE</span>
+                                <h3 class="branch-name">Web Architecture &amp; Core Systems</h3>
+                            </div>
+                        </div>
+
+                        <p class="branch-desc">
+                            High-velocity zero-dependency modern CSS, ES6+ JavaScript, DOM APIs, Git, and Linux systems
+                            architecture combined with algorithmic problem solving.
+                        </p>
+
+                        <div class="branch-skills-cluster">
+                            <span class="skill-tag highlight-skill">Modern CSS</span>
+                            <span class="skill-tag highlight-skill">Vanilla JS</span>
+                            <span class="skill-tag highlight-skill">HTML5 Semantic</span>
+                            <span class="skill-tag">DOM APIs</span>
+                            <span class="skill-tag">Data Structures</span>
+                            <span class="skill-tag">Linux / Bash</span>
+                            <span class="skill-tag">Git / GitHub</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             05. THE GROWTH PATHWAY: MULTILAYER CHRONOLOGY (2021–2027)
+             ================================================================= -->
+        <section class="garden-section timeline-section" id="timeline">
+            <div class="garden-container">
+
+                <div class="section-flora-heading">
+                    <div class="heading-tag">
+                        <span class="tag-leaf-icon">🌱</span>
+                        <span class="tag-text">GROWTH PATHWAY &bull; CHRONOLOGY</span>
+                    </div>
+                    <h2 class="section-title">
+                        Winding path of <span class="serif-title serif-bloom">learning</span> &amp; milestones
+                        (2021&ndash;2027).
+                    </h2>
+                    <p class="section-subtitle">
+                        A botanical timeline connecting the important stages of growth. Every milestone represents
+                        genuine technical discipline, real code written, and lessons learned. Click any milestone node
+                        to inspect.
+                    </p>
+                </div>
+
+                <!-- Winding Botanical Journey Vine Container -->
+                <div class="growth-pathway-vine">
+
+                    <!-- Milestone 01: Foundational Roots at Polytechnic -->
+                    <div class="vine-node-item node-completed">
+                        <div class="vine-blossom-marker" title="Milestone 01: Polytechnic Foundations">
+                            <span class="blossom-marker-icon">🌱</span>
+                        </div>
+                        <div class="vine-content-card card-frame"
+                            onclick="window.portfolioStageEngine.openMilestoneModal('diploma-crp');">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2021 &ndash; 2024</span>
+                                    <span class="node-track-badge badge-education">FORMAL EDUCATION</span>
+                                </div>
+                                <span class="node-place">Chhotu Ram Polytechnic, Rohtak</span>
+                            </div>
+                            <h3 class="node-headline">Diploma in Computer Engineering (CS)</h3>
+                            <p class="node-summary">
+                                Rigorous 3-year foundational training in core engineering: Relational Databases, Data
+                                Structures &amp; Algorithms, Computer Networking, Digital Electronics, and Operating
+                                Systems.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Algorithms</span> <span>Data Structures</span> <span>Relational DB</span>
+                                <span>Operating Systems</span>
+                            </div>
+                            <button type="button" class="node-explore-link">
+                                <span>Inspect Milestone Log &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 02: University Degree at MDU Rohtak -->
+                    <div class="vine-node-item node-in-progress">
+                        <div class="vine-blossom-marker blossom-active" title="Milestone 02: B.Tech Computer Science">
+                            <span class="blossom-marker-icon">🌸</span>
+                        </div>
+                        <div class="vine-content-card card-frame is-highlighted"
+                            onclick="window.portfolioStageEngine.openMilestoneModal('btech-mdu');">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2024 &ndash; PRESENT (2027)</span>
+                                    <span class="node-track-badge badge-education">DEGREE PURSUIT &bull; IN
+                                        PROGRESS</span>
+                                </div>
+                                <span class="node-place">Maharshi Dayanand University (MDU Rohtak)</span>
+                            </div>
+                            <h3 class="node-headline">B.Tech Computer Science &amp; Engineering</h3>
+                            <p class="node-summary">
+                                Advancing theoretical and applied computer science: distributed architectures, database
+                                internals, algorithmic optimization, and enterprise software engineering methodologies.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Distributed Systems</span> <span>Database Architecture</span> <span>Software
+                                    Engineering</span>
+                            </div>
+                            <button type="button" class="node-explore-link">
+                                <span>Inspect Milestone Log &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 03: Orbit Browser Solo Sprint Deployment -->
+                    <div class="vine-node-item node-completed">
+                        <div class="vine-blossom-marker" title="Milestone 03: Orbit Browser Sprint">
+                            <span class="blossom-marker-icon">🪐</span>
+                        </div>
+                        <div class="vine-content-card card-frame"
+                            onclick="window.portfolioStageEngine.openMilestoneModal('orbit-sprint');">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2024 &ndash; 2025</span>
+                                    <span class="node-track-badge badge-projects">PROJECT DEPLOYMENT</span>
+                                </div>
+                                <span class="node-place">Independent Software Sprint</span>
+                            </div>
+                            <h3 class="node-headline">Orbit Browser MVP Engineering Sprint</h3>
+                            <p class="node-summary">
+                                Designed and shipped a cross-platform mobile browser MVP in Flutter and Dart within 14
+                                days. Implemented tab virtualization, SQLite history persistence, and released
+                                production Android APKs.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Flutter</span> <span>Dart</span> <span>SQLite</span> <span>Android APK</span>
+                            </div>
+                            <button type="button" class="node-explore-link">
+                                <span>Inspect Milestone Log &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 04: Obvious-Choice Live Platform -->
+                    <div class="vine-node-item node-in-progress">
+                        <div class="vine-blossom-marker blossom-active"
+                            title="Milestone 04: Obvious-Choice Live Platform">
+                            <span class="blossom-marker-icon">🌼</span>
+                        </div>
+                        <div class="vine-content-card card-frame"
+                            onclick="window.portfolioStageEngine.openMilestoneModal('obvious-choice-deploy');">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2025 &ndash; PRESENT</span>
+                                    <span class="node-track-badge badge-experience">PRODUCTION PLATFORM</span>
+                                </div>
+                                <span class="node-place">Public Web Platform</span>
+                            </div>
+                            <h3 class="node-headline">Obvious-Choice — Founder Digital Platform</h3>
+                            <p class="node-summary">
+                                Engineered a zero-dependency high-conversion web presence system for founders, achieving
+                                99+ Google Lighthouse scores and fluid typography using pure native HTML5, CSS3, and
+                                JavaScript.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Vanilla Web</span> <span>Lighthouse 99+</span> <span>CSS Grid</span>
+                                <span>Performance</span>
+                            </div>
+                            <button type="button" class="node-explore-link">
+                                <span>Inspect Milestone Log &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 05: Future Horizon -->
+                    <div class="vine-node-item node-horizon">
+                        <div class="vine-blossom-marker blossom-horizon" title="Milestone 05: SDE Horizons">
+                            <span class="blossom-marker-icon">✨</span>
+                        </div>
+                        <div class="vine-content-card card-frame">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2026 &ndash; 2027</span>
+                                    <span class="node-track-badge badge-horizon">NEXT HORIZON</span>
+                                </div>
+                                <span class="node-place">Global Software Engineering</span>
+                            </div>
+                            <h3 class="node-headline">Software Development Engineer (SDE) Roles</h3>
+                            <p class="node-summary">
+                                Actively seeking SDE internships and entry-level engineering positions across
+                                cross-platform mobile engineering, client systems, and scalable backend services.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Client Architecture</span> <span>Full-Stack SDE</span> <span>Collaborative
+                                    Teams</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hidden Containers for Fallback Script Render -->
+                <div id="chronology-tracks-root" style="display: none;"></div>
+                <div id="chronology-mobile-root" style="display: none;"></div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             06. THE CONSERVATORY (CONTACT & DIRECT VERIFIED COMMS)
+             ================================================================= -->
+        <section class="garden-section contact-section" id="contact">
+            <div class="garden-container">
+
+                <div class="conservatory-frame card-frame">
+                    <div class="card-corner-motif top-left"></div>
+                    <div class="card-corner-motif top-right"></div>
+                    <div class="card-corner-motif bottom-left"></div>
+                    <div class="card-corner-motif bottom-right"></div>
+
+                    <div class="conservatory-grid">
+
+                        <!-- Left: Narrative & Direct Channel -->
+                        <div class="conservatory-intro-col">
+                            <div class="heading-tag">
+                                <span class="tag-leaf-icon">✉</span>
+                                <span class="tag-text">THE CONSERVATORY &bull; DIRECT CHANNEL</span>
+                            </div>
+                            <h2 class="conservatory-title">
+                                Let's cultivate something <span class="serif-title serif-bloom">tangible</span>
+                                together.
+                            </h2>
+                            <p class="conservatory-desc">
+                                Actively interviewing for Flutter developer internships, junior software engineering
+                                roles, and ambitious collaborative builds. Whether you have a project in mind or want to
+                                discuss architecture, my channel is open.
+                            </p>
+
+                            <!-- 1-Click Email Action Card -->
+                            <div class="direct-email-card">
+                                <span class="email-card-label">PRIMARY VERIFIED INBOX:</span>
+                                <div class="email-display-row">
+                                    <a href="mailto:parveenmakwana02@gmail.com" class="email-anchor"
+                                        id="email-address">parveenmakwana02@gmail.com</a>
+                                    <button class="garden-btn btn-leaf-primary copy-btn" id="copy-email-btn"
+                                        type="button" aria-label="Copy email address to clipboard">
+                                        <span class="btn-icon">📋</span>
+                                        <span id="copy-btn-label">Copy Address</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Verified Profiles & Station Coordinates -->
+                        <div class="conservatory-relays-col">
+                            <span class="relays-header-title">VERIFIED DIGITAL PROFILES:</span>
+
+                            <div class="garden-relays-grid">
+                                <a href="https://linkedin.com/in/parveenkumar--/" target="_blank" rel="noopener"
+                                    class="garden-relay-card" id="relay-card-linkedin">
+                                    <div class="relay-icon-wrap">💼</div>
+                                    <div class="relay-text">
+                                        <span class="relay-name">LinkedIn Profile</span>
+                                        <span class="relay-handle">/in/parveenkumar--</span>
+                                    </div>
+                                    <span class="relay-arrow">&nearr;</span>
+                                </a>
+
+                                <a href="https://github.com/parveenengg" target="_blank" rel="noopener"
+                                    class="garden-relay-card" id="relay-card-github">
+                                    <div class="relay-icon-wrap">🐙</div>
+                                    <div class="relay-text">
+                                        <span class="relay-name">GitHub Vault</span>
+                                        <span class="relay-handle">github.com/parveenengg</span>
+                                    </div>
+                                    <span class="relay-arrow">&nearr;</span>
+                                </a>
+
+                                <a href="https://leetcode.com/u/parveen_engi/" target="_blank" rel="noopener"
+                                    class="garden-relay-card" id="relay-card-leetcode">
+                                    <div class="relay-icon-wrap">⚡</div>
+                                    <div class="relay-text">
+                                        <span class="relay-name">LeetCode</span>
+                                        <span class="relay-handle">leetcode.com/u/parveen_engi</span>
+                                    </div>
+                                    <span class="relay-arrow">&nearr;</span>
+                                </a>
+
+                                <a href="https://www.instagram.com/parveen.tv/" target="_blank" rel="noopener"
+                                    class="garden-relay-card" id="relay-card-instagram">
+                                    <div class="relay-icon-wrap">📸</div>
+                                    <div class="relay-text">
+                                        <span class="relay-name">Instagram</span>
+                                        <span class="relay-handle">@parveen.tv</span>
+                                    </div>
+                                    <span class="relay-arrow">&nearr;</span>
+                                </a>
+                            </div>
+
+                            <!-- Station Telemetry Bar -->
+                            <div class="station-telemetry-bar">
+                                <div class="telemetry-item">
+                                    <span class="t-k">BASE:</span>
+                                    <span class="t-v">Rohtak, Haryana</span>
+                                </div>
+                                <div class="telemetry-item">
+                                    <span class="t-k">LIVE IST:</span>
+                                    <span class="t-v" id="contact-clock">--:--:-- IST</span>
+                                </div>
+                                <div class="telemetry-item">
+                                    <span class="t-k">YEAR:</span>
+                                    <span class="t-v" id="current-year">2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
+
+    <!-- FULL-SCREEN INTERACTIVE DEVELOPER CLI (Mode 02: Terminal View) -->
+    <section class="terminal-view-section" id="terminal-view" aria-label="Interactive Terminal View"
+        style="display: none;">
+        <div class="container terminal-view-container">
+            <div class="terminal-screen card-frame">
+                <div class="card-corner-motif top-left"></div>
+                <div class="card-corner-motif top-right"></div>
+                <div class="card-corner-motif bottom-left"></div>
+                <div class="card-corner-motif bottom-right"></div>
+
+                <!-- Terminal Titlebar -->
+                <div class="terminal-window-bar">
+                    <div class="window-controls" aria-hidden="true">
+                        <span class="ctrl-dot dot-red"></span>
+                        <span class="ctrl-dot dot-yellow"></span>
+                        <span class="ctrl-dot dot-green"></span>
+                    </div>
+                    <span class="terminal-bar-title">zsh &mdash; parveen@living-garden-cli:~</span>
+                    <div class="terminal-right-tools">
+                        <span class="terminal-bar-badge status-active">● ONLINE [v5.0.0]</span>
+                        <button class="terminal-switch-gui-btn" id="terminal-switch-gui-btn" type="button"
+                            title="Return to Living Garden [Esc]">
+                            <span>Return to Garden GUI &nearr;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Terminal Console Viewport -->
+                <div class="terminal-viewport" id="terminal-viewport">
+                    <!-- ASCII Welcome Banner -->
+                    <pre class="terminal-ascii-art" aria-hidden="true">
+╭────────────────────────────────────────────────────────────╮
+│  PARVEEN MAKWANA / DEVELOPER TERMINAL [v5.0.0]             │
+│  Official Legal Name: Parveen Kumar                        │
+│  Shaped by where I came from, defined by what I build      │
+│  Type 'help' to inspect available system commands          │
+│  Type 'gui' or press 'Esc' to return to Living Garden      │
+╰────────────────────────────────────────────────────────────╯</pre>
+
+                    <div class="terminal-welcome-msg">
+                        <p class="term-line">System ready. Available commands: <code class="term-code-cmd">help</code>,
+                            <code class="term-code-cmd">about</code>, <code class="term-code-cmd">projects</code>, <code
+                                class="term-code-cmd">skills</code>, <code class="term-code-cmd">journey</code>, <code
+                                class="term-code-cmd">experience</code>, <code class="term-code-cmd">contact</code>,
+                            <code class="term-code-cmd">sound</code>, <code class="term-code-cmd">gui</code>, <code
+                                class="term-code-cmd">clear</code>.</p>
+                        <p class="term-line-sub">Click any quick shortcut below or type into the interactive prompt.</p>
+                    </div>
+
+                    <!-- Command Output History Buffer -->
+                    <div class="terminal-output-buffer" id="terminal-output-buffer"></div>
+
+                    <!-- Live Command Line Prompt Row -->
+                    <form class="terminal-input-row" id="terminal-form" autocomplete="off" onsubmit="return false;">
+                        <label for="terminal-input" class="term-prompt-user">parveen@garden:~$</label>
+                        <input type="text" class="term-input" id="terminal-input" aria-label="Terminal command prompt"
+                            placeholder="type command (e.g. 'projects', 'help', 'journey')..." spellcheck="false"
+                            autocomplete="off" autocapitalize="none">
+                        <button type="submit" class="term-submit-btn" aria-label="Run command">Run &crarr;</button>
+                    </form>
+                </div>
+
+                <!-- Mobile & Tablet Touch Command Shortcuts Bar -->
+                <div class="terminal-shortcuts-bar" aria-label="Quick Command Shortcuts">
+                    <span class="shortcuts-label">QUICK MACROS:</span>
+                    <div class="shortcuts-buttons">
+                        <button type="button" class="shortcut-pill" data-cmd="help">$ help</button>
+                        <button type="button" class="shortcut-pill" data-cmd="about">$ about</button>
+                        <button type="button" class="shortcut-pill" data-cmd="projects">$ projects</button>
+                        <button type="button" class="shortcut-pill" data-cmd="skills">$ skills</button>
+                        <button type="button" class="shortcut-pill" data-cmd="journey">$ journey</button>
+                        <button type="button" class="shortcut-pill" data-cmd="experience">$ experience</button>
+                        <button type="button" class="shortcut-pill" data-cmd="contact">$ contact</button>
+                        <button type="button" class="shortcut-pill" data-cmd="clear">$ clear</button>
+                        <button type="button" class="shortcut-pill shortcut-pill-gui" data-cmd="gui">$ gui
+                            &nearr;</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Identity Snapshot Modal -->
+    <div class="profile-modal" id="profile-modal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="modal-name">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-window card-frame">
+            <div class="card-corner-motif top-left"></div>
+            <div class="card-corner-motif top-right"></div>
+
+            <div class="terminal-window-bar">
+                <div class="window-controls" aria-hidden="true">
+                    <span class="ctrl-dot dot-red"></span>
+                    <span class="ctrl-dot dot-yellow"></span>
+                    <span class="ctrl-dot dot-green"></span>
+                </div>
+                <span class="terminal-bar-title">botanical // identity-snapshot.env</span>
+                <span class="terminal-bar-badge status-active">● VERIFIED SDE</span>
+            </div>
+
+            <div class="modal-head">
+                <div class="modal-identity">
+                    <span class="badge-dot-lg" style="background: var(--accent-jade, #2E7D5A);"></span>
+                    <h3 class="modal-name" id="modal-name">Parveen Makwana</h3>
+                    <span class="modal-tag">B.Tech CSE '27</span>
+                </div>
+                <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            </div>
+
+            <div class="modal-body-content">
+                <p class="modal-lead">
+                    “Shaped by where I came from, defined by what I build.”
+                </p>
+                <div class="modal-spec-grid">
+                    <div class="m-spec highlight-legal-row">
+                        <span class="m-k">Legal / Academic Name</span>
+                        <span class="m-v highlight-jade"><strong>Parveen Kumar</strong> (Documented in all academic
+                            &amp; legal records)</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Public Identity</span>
+                        <span class="m-v">Parveen Makwana</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Verified Profiles</span>
+                        <span class="m-v">LinkedIn &bull; GitHub &bull; LeetCode &bull; Instagram</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Core Disciplines</span>
+                        <span class="m-v">Flutter &bull; Dart &bull; Node.js &bull; Python &bull; JavaScript</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Current Status</span>
+                        <span class="m-v highlight-jade">Open to SDE Internships &amp; Entry-Level Roles</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Flagship Build</span>
+                        <span class="m-v">Orbit Browser (Cross-Platform Android APK &bull; 60 FPS)</span>
+                    </div>
+                    <div class="m-spec">
+                        <span class="m-k">Direct Frequency</span>
+                        <span class="m-v">parveenmakwana02@gmail.com</span>
+                    </div>
+                </div>
+                <div class="modal-cta-row">
+                    <a href="https://linkedin.com/in/parveenkumar--/" target="_blank" rel="noopener"
+                        class="garden-btn btn-leaf-primary" style="flex: 1;">
+                        <span>LinkedIn &nearr;</span>
+                    </a>
+                    <a href="https://github.com/parveenengg" target="_blank" rel="noopener"
+                        class="garden-btn btn-petal-ghost" style="flex: 1;">
+                        <span>GitHub &nearr;</span>
+                    </a>
+                    <a href="https://leetcode.com/u/parveen_engi/" target="_blank" rel="noopener"
+                        class="garden-btn btn-petal-ghost" style="flex: 1;">
+                        <span>LeetCode &nearr;</span>
+                    </a>
+                    <a href="https://www.instagram.com/parveen.tv/" target="_blank" rel="noopener"
+                        class="garden-btn btn-petal-ghost" style="flex: 1;">
+                        <span>Instagram &nearr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Milestone Detail Modal (Accessible & Keyboard Dismissable) -->
+    <div class="milestone-modal" id="milestone-modal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="m-modal-title">
+        <div class="milestone-modal-backdrop" id="milestone-modal-backdrop"></div>
+        <div class="milestone-modal-window card-frame">
+            <div class="card-corner-motif top-left"></div>
+            <div class="card-corner-motif top-right"></div>
+            <div class="card-corner-motif bottom-left"></div>
+            <div class="card-corner-motif bottom-right"></div>
+
+            <div class="terminal-window-bar">
+                <div class="window-controls" aria-hidden="true">
+                    <span class="ctrl-dot dot-red"></span>
+                    <span class="ctrl-dot dot-yellow"></span>
+                    <span class="ctrl-dot dot-green"></span>
+                </div>
+                <span class="terminal-bar-title">flora // spec: milestone-manifest.log</span>
+                <span class="terminal-bar-badge status-built">● VERIFIED MILESTONE</span>
+            </div>
+
+            <div class="m-modal-head">
+                <div class="m-modal-meta">
+                    <span class="m-badge-track" id="m-modal-track">TRACK</span>
+                    <span class="m-badge-period" id="m-modal-period">PERIOD</span>
+                    <span class="m-badge-id" id="m-modal-id">NODE // 01</span>
+                </div>
+                <button class="modal-close-btn" id="milestone-close-btn" type="button"
+                    aria-label="Close milestone details">&times;</button>
+            </div>
+
+            <div class="m-modal-body" id="m-modal-body">
+                <h3 class="m-modal-title" id="m-modal-title">Milestone Title</h3>
+                <span class="m-modal-org" id="m-modal-org">Organization / Context</span>
+
+                <div class="m-modal-section">
+                    <span class="m-section-label">OVERVIEW &amp; CONTEXT</span>
+                    <p class="m-modal-summary" id="m-modal-summary">Summary text goes here.</p>
+                </div>
+
+                <div class="m-modal-section">
+                    <span class="m-section-label">TECHNICAL SPECIFICATIONS &amp; LEARNING TAKEAWAY</span>
+                    <p class="m-modal-details" id="m-modal-details">Detailed technical takeaway.</p>
+                </div>
+
+                <div class="m-modal-section" id="m-modal-tech-wrap">
+                    <span class="m-section-label">VERIFIED CAPABILITIES &amp; TOOLS</span>
+                    <div class="m-modal-tags" id="m-modal-tags">
+                        <!-- tags -->
+                    </div>
+                </div>
+
+                <div class="m-modal-preview-wrap" id="m-modal-preview-wrap" style="display: none;">
+                    <img src="" alt="" id="m-modal-img" class="m-modal-preview-img" loading="lazy">
+                </div>
+
+                <div class="m-modal-actions" id="m-modal-actions">
+                    <!-- Action buttons -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
