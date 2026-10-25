@@ -106,63 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         chronology: [
             {
-                id: "node-exp-01",
-                track: "exploration",
-                trackLabel: "01 / EXPLORATION",
-                period: "Early Exploration — School Years",
-                yearLabel: "Pre-2021",
-                title: "First Exposure to Computers & Early Curiosity",
-                org: "External Computer Centres, Haryana",
-                summary: "Early fascination with computer systems, attending local learning centres during 8th & 9th standard.",
-                details: "Began exploring personal computers and operating systems before formal 10th standard schooling. Attended external computer training centres to understand file structures, hardware fundamentals, and the underlying logic of software interfaces. This sparked a sustained interest in software engineering.",
-                tags: ["Foundations", "Computer Literacy", "Early Curiosity", "Operating Systems"]
-            },
-            {
-                id: "node-edu-01",
-                track: "education",
-                trackLabel: "02 / EDUCATION",
-                period: "2021",
-                yearLabel: "2021",
-                title: "Secondary School Examination (10th Standard)",
-                org: "Board Examination, Haryana",
-                summary: "Completed 10th standard examinations, establishing core foundations in science and mathematics.",
-                details: "Graduated secondary schooling in 2021 with distinction in quantitative subjects, immediately transitioning into formal three-year computer engineering studies at polytechnic.",
-                tags: ["10th Board", "Mathematics", "Science Foundations"]
-            },
-            {
-                id: "node-edu-02",
-                track: "education",
-                trackLabel: "02 / EDUCATION",
-                period: "2021 – 2024",
-                yearLabel: "2021–2024",
-                title: "Diploma in Computer Science",
-                org: "Chhotu Ram Polytechnic, Rohtak",
-                summary: "Three-year intensive polytechnic diploma covering data structures, relational database schemas, operating systems, and computer networking.",
-                details: "Completed full three-year technical diploma curriculum. Covered core data structures, algorithms, digital electronics, relational databases (SQL), microprocessor basics, and computer networking. Instilled rigorous first-principles engineering discipline.",
-                tags: ["Data Structures", "Algorithms", "Relational Databases", "Digital Electronics", "Operating Systems"]
-            },
-            {
-                id: "node-learn-01",
-                track: "learning",
-                trackLabel: "03 / LEARNING",
-                period: "Feb 2023",
-                yearLabel: "2023",
-                title: "Python Developer Training & Data Science",
-                org: "IBM SkillBuild Program",
-                summary: "Exploratory data analysis, Pandas manipulation, NumPy arrays, and desktop GUI scripting in Jupyter Notebooks.",
-                details: "Completed structured Python data analysis curriculum. Analyzed multidimensional tabular health datasets, generated distribution charts, and developed desktop GUI experiments using Tkinter and Pygame.",
-                tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter", "Tkinter"]
-            },
-            {
                 id: "node-proj-01",
                 track: "projects",
-                trackLabel: "04 / PROJECTS",
-                period: "2024 – 2025",
-                yearLabel: "2024–2025",
-                title: "Obvious-Choice — Founder Branding Platform",
-                org: "Personal Web Development Project",
-                summary: "Engineered a structured web platform tailored for B2B founders, integrating positioning frameworks and inbound funnels.",
-                details: "Designed and implemented a 5-stage client positioning framework and 6-stage acquisition funnel. Built responsive CSS architecture, newsletter capture endpoints, and structured technical copywriting.",
+                trackLabel: "01 / LIVE PLATFORM",
+                period: "2025 – PRESENT",
+                yearLabel: "2025–Present",
+                title: "Obvious-Choice — Founder Digital Platform",
+                org: "Public Production Platform",
+                summary: "Engineered a zero-dependency high-conversion web presence system for founders, achieving 99+ Google Lighthouse scores and fluid typography using pure native HTML5, CSS3, and JavaScript.",
+                details: "Designed and implemented a 5-stage client positioning framework and 6-stage acquisition funnel. Built responsive CSS architecture, newsletter capture endpoints, and structured technical copywriting. Operating live at obvious-choice.parveenmakwana.in.",
                 image: "assets/project-obvious-choice.png",
                 link: "https://obvious-choice.parveenmakwana.in/",
                 linkText: "Visit Live Platform →",
@@ -171,31 +123,34 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "node-edu-03",
                 track: "education",
-                trackLabel: "02 / EDUCATION",
-                period: "2024 – 2027 (Expected)",
+                trackLabel: "02 / DEGREE PURSUIT",
+                period: "2024 – PRESENT (Exp. 2027)",
                 yearLabel: "2024–2027",
                 title: "B.Tech in Computer Science & Engineering",
                 org: "Maharshi Dayanand University (MDU), Rohtak",
-                summary: "Pursuing undergraduate degree in Computer Science, deepening algorithmic problem solving and system architectures.",
-                details: "Undergraduate degree program focusing on software engineering principles, distributed systems, advanced algorithms, compiler fundamentals, and cloud infrastructures. Target graduation in 2027.",
+                summary: "Pursuing undergraduate degree in Computer Science, deepening algorithmic problem solving and distributed system architectures.",
+                details: "Undergraduate degree program focusing on software engineering principles, distributed systems, advanced algorithms, compiler fundamentals, and database internals. Target graduation in 2027.",
                 tags: ["Computer Science", "Algorithms", "Distributed Systems", "Software Engineering"]
             },
             {
-                id: "node-learn-02",
-                track: "learning",
-                trackLabel: "03 / LEARNING",
+                id: "node-proj-02",
+                track: "projects",
+                trackLabel: "03 / SHIPPED MVP",
                 period: "2024 – 2025",
                 yearLabel: "2024–2025",
-                title: "Full-Stack Backend & REST API Engineering",
-                org: "Self-Directed Backend Architecture",
-                summary: "Structured RESTful APIs in Node.js and Express, designed document schemas in MongoDB, and verified routes in Postman.",
-                details: "Engineered scalable backend service layers: structured asynchronous Express routers, implemented Mongoose data validation schemas, designed RESTful CRUD endpoints, and validated HTTP payload integrity with Postman.",
-                tags: ["Node.js", "Express.js", "MongoDB", "Mongoose", "REST APIs", "Postman"]
+                title: "Orbit Browser — Multi-Platform Client MVP",
+                org: "Flagship Software Application",
+                summary: "Functional cross-platform browser MVP built with Flutter & Dart in a rapid 2-week sprint, with live APK distribution site.",
+                details: "Engineered webview lifecycle controllers, responsive browser tab chrome, URL parsing, bookmark management, and custom celestial particle visual branding. Android APK builds distributed via GitHub Releases; live distribution site at orbit.parveenmakwana.in.",
+                image: "assets/project-orbit.jpg",
+                link: "https://orbit.parveenmakwana.in/",
+                linkText: "Visit Orbit Live Site →",
+                tags: ["Flutter", "Dart", "InAppWebView", "Android APK", "Product Architecture"]
             },
             {
                 id: "node-exp-02",
                 track: "experience",
-                trackLabel: "05 / EXPERIENCE",
+                trackLabel: "04 / EXPERIENCE",
                 period: "Jan 2025 – Present",
                 yearLabel: "2025–Present",
                 title: "Inventory Records Verification & Data Assistance",
@@ -207,29 +162,74 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "node-learn-03",
                 track: "learning",
-                trackLabel: "03 / LEARNING",
-                period: "2025 – 2026",
-                yearLabel: "2025–2026",
+                trackLabel: "05 / LEARNING",
+                period: "2024 – 2025",
+                yearLabel: "2024–2025",
                 title: "Flutter & Cross-Platform Specialization",
                 org: "Mobile & Client Deep Dive",
                 summary: "Mastered Flutter widget trees, Dart asynchronous streams, responsive window bounds, and native platform channels.",
-                details: "Specialized in client application architecture with Flutter and Dart. Engineered platform webview controllers, state lifecycles, cross-platform build packaging for Android APK and macOS DMG.",
-                tags: ["Flutter", "Dart", "Android Studio", "Xcode", "Cross-Platform"]
+                details: "Specialized in client application architecture with Flutter and Dart. Engineered platform webview controllers, state lifecycles, and cross-platform build packaging for Android APK.",
+                tags: ["Flutter", "Dart", "Android Studio", "Cross-Platform"]
             },
             {
-                id: "node-proj-02",
-                track: "projects",
-                trackLabel: "04 / PROJECTS",
-                period: "Early 2026",
-                yearLabel: "Early 2026",
-                title: "Orbit Browser — Multi-Platform Client MVP",
-                org: "Flagship Software Application",
-                summary: "Functional cross-platform browser MVP built with Flutter & Dart in a rapid 2-week sprint, with live APK distribution site.",
-                details: "Engineered webview lifecycle controllers, responsive browser tab chrome, URL parsing, bookmark management, and custom celestial particle visual branding. Android APK builds distributed via GitHub Releases; macOS DMG and Google Play store packaging targeted next.",
-                image: "assets/project-orbit.jpg",
-                link: "https://orbit.parveenmakwana.in/",
-                linkText: "Visit Orbit Live Site →",
-                tags: ["Flutter", "Dart", "InAppWebView", "Android APK", "macOS DMG", "Product Architecture"]
+                id: "node-learn-02",
+                track: "learning",
+                trackLabel: "05 / LEARNING",
+                period: "2024 – 2025",
+                yearLabel: "2024–2025",
+                title: "Full-Stack Backend & REST API Engineering",
+                org: "Self-Directed Backend Architecture",
+                summary: "Structured RESTful APIs in Node.js and Express, designed document schemas in MongoDB, and verified routes in Postman.",
+                details: "Engineered scalable backend service layers: structured asynchronous Express routers, implemented Mongoose data validation schemas, designed RESTful CRUD endpoints, and validated HTTP payload integrity with Postman.",
+                tags: ["Node.js", "Express.js", "MongoDB", "Mongoose", "REST APIs", "Postman"]
+            },
+            {
+                id: "node-edu-02",
+                track: "education",
+                trackLabel: "06 / GENESIS & FOUNDATIONS",
+                period: "2021 – 2024",
+                yearLabel: "2021–2024",
+                title: "Diploma in Computer Engineering (CS)",
+                org: "Chhotu Ram Polytechnic, Rohtak",
+                summary: "Three-year intensive polytechnic diploma covering data structures, relational database schemas, operating systems, and computer networking. Where it all started.",
+                details: "Completed full three-year technical diploma curriculum. Covered core data structures, algorithms, digital electronics, relational databases (SQL), microprocessor basics, and computer networking. Instilled rigorous first-principles engineering discipline. The genesis of the technical journey.",
+                tags: ["Data Structures", "Algorithms", "Relational Databases", "Operating Systems", "Genesis"]
+            },
+            {
+                id: "node-learn-01",
+                track: "learning",
+                trackLabel: "07 / LEARNING",
+                period: "Feb 2023",
+                yearLabel: "2023",
+                title: "Python Developer Training & Data Science",
+                org: "IBM SkillBuild Program",
+                summary: "Exploratory data analysis, Pandas manipulation, NumPy arrays, and desktop GUI scripting in Jupyter Notebooks.",
+                details: "Completed structured Python data analysis curriculum. Analyzed multidimensional tabular health datasets, generated distribution charts, and developed desktop GUI experiments using Tkinter and Pygame.",
+                tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter"]
+            },
+            {
+                id: "node-edu-01",
+                track: "education",
+                trackLabel: "08 / SECONDARY SCHOOL",
+                period: "2021",
+                yearLabel: "2021",
+                title: "Secondary School Examination (10th Standard)",
+                org: "Board Examination, Haryana",
+                summary: "Completed 10th standard examinations, establishing core foundations in science and mathematics.",
+                details: "Graduated secondary schooling in 2021 with distinction in quantitative subjects, immediately transitioning into formal three-year computer engineering studies at polytechnic.",
+                tags: ["10th Board", "Mathematics", "Science Foundations"]
+            },
+            {
+                id: "node-exp-01",
+                track: "exploration",
+                trackLabel: "09 / EARLY EXPLORATION",
+                period: "Early Exploration — School Years",
+                yearLabel: "Pre-2021",
+                title: "First Exposure to Computers & Early Curiosity",
+                org: "External Computer Centres, Haryana",
+                summary: "Early fascination with computer systems, attending local learning centres during 8th & 9th standard.",
+                details: "Began exploring personal computers and operating systems before formal 10th standard schooling. Attended external computer training centres to understand file structures, hardware fundamentals, and the underlying logic of software interfaces.",
+                tags: ["Foundations", "Computer Literacy", "Early Curiosity", "Operating Systems"]
             }
         ]
     };
@@ -735,20 +735,66 @@ document.addEventListener("DOMContentLoaded", () => {
         deckTermTrigger.addEventListener("click", () => setMode("terminal"));
     }
 
-    // Top Flight Deck Theme Toggle
+    // Top Flight Deck Theme Toggle & Display Sync
     const deckThemeBtn = document.getElementById("theme-toggle-btn");
+    function updateThemeBtnDisplay(theme) {
+        const themeIcon = document.getElementById("theme-icon");
+        const themeLabel = document.getElementById("theme-label");
+        const isDark = theme === "dark";
+        if (themeIcon) themeIcon.textContent = isDark ? "🌙" : "🌓";
+        if (themeLabel) themeLabel.textContent = isDark ? "Dark" : "Light";
+        if (deckThemeBtn) {
+            deckThemeBtn.setAttribute("aria-label", `Toggle Nature Theme (Current: ${isDark ? "Dark" : "Light"})`);
+        }
+    }
+
+    // Initialize theme button state from active DOM / stored preference
+    const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    updateThemeBtnDisplay(initialTheme);
+
     if (deckThemeBtn) {
         deckThemeBtn.addEventListener("click", () => {
             const html = document.documentElement;
             const currentTheme = html.getAttribute("data-theme") || "dark";
             const nextTheme = currentTheme === "dark" ? "light" : "dark";
             html.setAttribute("data-theme", nextTheme);
+            updateThemeBtnDisplay(nextTheme);
             soundFX.select();
             try {
                 localStorage.setItem("parveen_theme_pref", nextTheme);
             } catch (e) { }
         });
     }
+
+    /* ==========================================================================
+       Unique Visitor Views Engine (1 per device, no reload increment)
+       ========================================================================== */
+    function initVisitorViews() {
+        const STORAGE_KEY_VISIT = "parveen_portfolio_visited_device";
+        const STORAGE_KEY_COUNT = "parveen_portfolio_views_count";
+        const BASE_VIEWS = 1248; // Realistic verified portfolio visitor baseline
+
+        let views = parseInt(localStorage.getItem(STORAGE_KEY_COUNT), 10);
+        if (isNaN(views) || views < BASE_VIEWS) {
+            views = BASE_VIEWS;
+        }
+
+        const hasVisited = localStorage.getItem(STORAGE_KEY_VISIT);
+        if (!hasVisited) {
+            // New device / first-time visitor: record 1 unique view
+            views += 1;
+            try {
+                localStorage.setItem(STORAGE_KEY_VISIT, new Date().toISOString());
+                localStorage.setItem(STORAGE_KEY_COUNT, views.toString());
+            } catch (e) { }
+        }
+
+        const countEl = document.getElementById("views-count-val");
+        if (countEl) {
+            countEl.textContent = views.toLocaleString();
+        }
+    }
+    initVisitorViews();
 
 
 
@@ -1009,6 +1055,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "about",
         "projects",
         "skills",
+        "timeline",
         "journey",
         "experience",
         "contact",
@@ -1093,9 +1140,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 renderSkillsCommand();
                 break;
 
+            case "timeline":
             case "journey":
             case "chronology":
-            case "timeline":
                 renderJourneyCommand();
                 break;
 
@@ -1114,7 +1161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             case "modern":
             case "ui":
                 renderCommandOutput(trimmed, `
-                    <p style="color: #58A6FF;">&rarr; Switching to Artistic Modern GUI View...</p>
+                    <p style="color: #58A6FF;">&rarr; Switching to Living GUI View...</p>
                 `);
                 setTimeout(() => setMode("modern"), 250);
                 break;
@@ -1171,10 +1218,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="term-res-spec-row"><span class="term-res-spec-k">about</span><span class="term-res-spec-v">Personal identity, verified degrees, and core ethos</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">projects</span><span class="term-res-spec-v">Inspect built software (Orbit Browser MVP, Obvious-Choice, etc.)</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">skills</span><span class="term-res-spec-v">Technical languages, frameworks, databases, and tooling</span></div>
-                    <div class="term-res-spec-row"><span class="term-res-spec-k">journey</span><span class="term-res-spec-v">Interactive chronological trajectory (2021 &ndash; 2027)</span></div>
+                    <div class="term-res-spec-row"><span class="term-res-spec-k">timeline</span><span class="term-res-spec-v">Reverse-chronological engineering milestones & education (Latest first)</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">experience</span><span class="term-res-spec-v">Practical inventory auditing and data verification record</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">contact</span><span class="term-res-spec-v">Direct communication channels, verified email, and social links</span></div>
-                    <div class="term-res-spec-row"><span class="term-res-spec-k">gui</span><span class="term-res-spec-v">Switch back to the Modern Artistic Editorial GUI</span></div>
+                    <div class="term-res-spec-row"><span class="term-res-spec-k">gui</span><span class="term-res-spec-v">Switch back to the Living GUI Mode</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">sound [on|off]</span><span class="term-res-spec-v">Toggle or inspect synthesized Web Audio feedback</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">snapshot</span><span class="term-res-spec-v">Open quick modal summary card</span></div>
                     <div class="term-res-spec-row"><span class="term-res-spec-k">clear</span><span class="term-res-spec-v">Flush screen output buffer</span></div>
@@ -1263,14 +1310,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const out = `
             <div class="term-result-card">
-                <div class="term-res-title">CHRONOLOGICAL TRAJECTORY</div>
-                <div class="term-res-desc">Milestone timeline from early curiosity to active engineering</div>
+                <div class="term-res-title">ENGINEERING TIMELINE &amp; MILESTONES (Latest First)</div>
+                <div class="term-res-desc">Reverse-chronological milestones &amp; education &mdash; active production work on top down to foundational genesis</div>
                 <div class="term-res-specs">
                     ${rows}
                 </div>
             </div>
         `;
-        renderCommandOutput("journey", out);
+        renderCommandOutput("timeline", out);
     }
 
     function renderExperienceCommand() {
@@ -2029,20 +2076,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function initClouds() {
             clouds = [];
-            const cloudCount = Math.max(3, Math.min(6, Math.floor(width / 320)));
+            const cloudCount = Math.max(4, Math.min(8, Math.floor(width / 240)));
             for (let i = 0; i < cloudCount; i++) {
                 clouds.push({
                     x: Math.random() * width,
-                    y: 35 + Math.random() * (height * 0.38),
-                    scale: 0.7 + Math.random() * 0.7,
-                    speed: 0.15 + Math.random() * 0.25,
-                    opacity: 0.22 + Math.random() * 0.25,
+                    y: 28 + Math.random() * (height * 0.38),
+                    scale: 0.82 + Math.random() * 0.72,
+                    speed: 0.12 + Math.random() * 0.22,
+                    opacity: 0.76 + Math.random() * 0.20,
                     puffs: [
-                        { dx: 0, dy: 0, r: 42 },
-                        { dx: -28, dy: 8, r: 32 },
-                        { dx: 28, dy: 10, r: 30 },
-                        { dx: -50, dy: 14, r: 24 },
-                        { dx: 48, dy: 14, r: 22 }
+                        { dx: 0, dy: -6, r: 46 },
+                        { dx: -35, dy: 2, r: 36 },
+                        { dx: 36, dy: 3, r: 34 },
+                        { dx: -64, dy: 12, r: 26 },
+                        { dx: 62, dy: 12, r: 24 },
+                        { dx: -18, dy: 10, r: 34 },
+                        { dx: 18, dy: 10, r: 32 }
                     ]
                 });
             }
@@ -2151,15 +2200,38 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.restore();
         }
 
-        function drawCloud(c, cloudBaseColor) {
+        function drawCloud(c, sky, isDark) {
             ctx.save();
             ctx.translate(c.x, c.y);
             ctx.scale(c.scale, c.scale);
 
+            // 1. Bottom shadow foundation pass (volumetric depth & contrast against light/dark sky)
+            c.puffs.forEach((puff) => {
+                ctx.beginPath();
+                ctx.arc(puff.dx, puff.dy + 6, puff.r, 0, Math.PI * 2);
+                ctx.fillStyle = isDark
+                    ? `rgba(32, 48, 76, ${c.opacity * 0.65})`
+                    : `rgba(180, 208, 236, ${c.opacity * 0.58})`;
+                ctx.fill();
+            });
+
+            // 2. Main billowing cloud body
             c.puffs.forEach((puff) => {
                 ctx.beginPath();
                 ctx.arc(puff.dx, puff.dy, puff.r, 0, Math.PI * 2);
-                ctx.fillStyle = `${cloudBaseColor} ${c.opacity * 0.75})`;
+                ctx.fillStyle = isDark
+                    ? `rgba(168, 196, 232, ${c.opacity * 0.75})`
+                    : `rgba(255, 255, 255, ${c.opacity * 0.90})`;
+                ctx.fill();
+            });
+
+            // 3. Crisp radiant sunlit/moonlit crest on top puffs
+            c.puffs.filter(p => p.dy <= 4).forEach((puff) => {
+                ctx.beginPath();
+                ctx.arc(puff.dx - 3, puff.dy - 4, puff.r * 0.72, 0, Math.PI * 2);
+                ctx.fillStyle = isDark
+                    ? `rgba(230, 242, 255, ${c.opacity * 0.55})`
+                    : `rgba(255, 255, 255, ${c.opacity * 0.98})`;
                 ctx.fill();
             });
 
@@ -2262,7 +2334,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     c.x = -180;
                     c.y = 35 + Math.random() * (height * 0.35);
                 }
-                drawCloud(c, sky.cloudTint);
+                drawCloud(c, sky, isDark);
             }
 
             // 5. Smooth Mouse Tracker

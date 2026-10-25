@@ -17,10 +17,10 @@
     --ground-soil: #ECE8DD;
 
     --bg-base: #FAF8F5;
-    --bg-surface: rgba(255, 255, 255, 0.72);
-    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-surface: rgba(255, 255, 255, 0.50);
+    --bg-card: rgba(255, 255, 255, 0.65);
     --bg-card-solid: #FFFFFF;
-    --bg-card-hover: rgba(255, 255, 255, 0.96);
+    --bg-card-hover: rgba(255, 255, 255, 0.82);
 
     /* Text Tiers */
     --text-primary: #18231E;
@@ -60,14 +60,17 @@
     --flora-brass-glow: rgba(194, 139, 56, 0.25);
 
     /* Borders & Subtle Frames */
-    --border-card: rgba(46, 125, 90, 0.12);
-    --border-card-hover: rgba(46, 125, 90, 0.32);
-    --border-hairline: rgba(24, 35, 30, 0.06);
+    --border-card: rgba(255, 255, 255, 0.45);
+    --border-card-hover: rgba(46, 125, 90, 0.45);
+    --border-hairline: rgba(24, 35, 30, 0.08);
+
+    /* Glass Specular Reflection Highlight */
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.65);
 
     /* Shadows */
     --shadow-subtle: 0 4px 20px -2px rgba(27, 48, 36, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    --shadow-card: 0 12px 35px -8px rgba(27, 48, 36, 0.06), 0 0 1px rgba(46, 125, 90, 0.15);
-    --shadow-elevated: 0 22px 50px -12px rgba(46, 125, 90, 0.14), 0 2px 8px rgba(27, 48, 36, 0.04);
+    --shadow-card: 0 16px 36px -8px rgba(27, 48, 36, 0.08), 0 0 1px rgba(46, 125, 90, 0.15);
+    --shadow-elevated: 0 22px 50px -12px rgba(46, 125, 90, 0.16), 0 2px 8px rgba(27, 48, 36, 0.06);
     --shadow-blossom: 0 10px 30px -5px rgba(245, 158, 11, 0.2);
 
     /* Typography */
@@ -98,10 +101,18 @@
     --ground-soil: #16202B;
 
     --bg-base: #0A1118;
-    --bg-surface: rgba(14, 23, 34, 0.75);
-    --bg-card: rgba(16, 26, 38, 0.88);
+    --bg-surface: rgba(10, 17, 26, 0.50);
+    --bg-card: rgba(14, 23, 34, 0.65);
     --bg-card-solid: #121E2C;
-    --bg-card-hover: rgba(22, 35, 50, 0.95);
+    --bg-card-hover: rgba(20, 32, 46, 0.82);
+
+    --border-card: rgba(255, 255, 255, 0.12);
+    --border-card-hover: rgba(52, 211, 153, 0.40);
+    --border-hairline: rgba(255, 255, 255, 0.08);
+    --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16);
+
+    --shadow-card: 0 18px 40px -10px rgba(0, 0, 0, 0.45), 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-elevated: 0 24px 54px -12px rgba(0, 0, 0, 0.55), 0 0 2px rgba(52, 211, 153, 0.3);
 
     --text-primary: #F0F6F3;
     --text-muted: #9BB0A5;
@@ -402,11 +413,11 @@ body.garden-body {
 .card-frame {
     position: relative;
     background: var(--bg-card);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--border-card);
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-card), var(--glass-specular);
     transition: border-color 0.35s var(--ease-out-expo),
                 transform 0.35s var(--ease-out-expo),
                 box-shadow 0.35s var(--ease-out-expo),
@@ -415,7 +426,7 @@ body.garden-body {
 
 .card-frame:hover {
     border-color: var(--border-card-hover);
-    box-shadow: var(--shadow-elevated);
+    box-shadow: var(--shadow-elevated), var(--glass-specular);
 }
 
 /* Stepped corner accents representing architectural baoli & geometric leaves */
@@ -459,7 +470,7 @@ body.garden-body {
 }
 
 /* --------------------------------------------------------------------------
-   04. FLOATING MINIMAL NATURE DOCK (Zero Traditional Navbar / Footer)
+   04. FLOATING GLASS HUD NAVIGATION (All Modes: Desktop, Tablet, Mobile)
    -------------------------------------------------------------------------- */
 .garden-floating-dock {
     position: fixed;
@@ -467,148 +478,67 @@ body.garden-body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
-    padding: 0.45rem 0.9rem;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.38rem 0.65rem;
     border-radius: var(--radius-pill);
     background: var(--bg-card);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
     border: 1px solid var(--border-card);
-    box-shadow: 0 10px 30px -4px rgba(27, 48, 36, 0.1), 0 0 1px rgba(46, 125, 90, 0.2);
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.22), var(--glass-specular);
+    max-width: calc(100vw - 1.25rem);
     width: max-content;
-    max-width: calc(100vw - 2rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.garden-floating-dock::-webkit-scrollbar {
+    display: none;
 }
 
 .garden-floating-dock:hover {
     border-color: var(--border-card-hover);
-    box-shadow: 0 14px 40px -6px rgba(27, 48, 36, 0.14), 0 0 2px var(--flora-emerald);
+    box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.28), var(--glass-specular);
 }
 
-/* Botanical Monogram Brand */
-.dock-garden-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 700;
-    font-size: 0.88rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: var(--radius-pill);
-    background: var(--flora-emerald-soft);
-    border: 1px solid rgba(46, 125, 90, 0.15);
-    transition: all 0.25s ease;
-}
-
-.dock-garden-brand:hover {
-    background: var(--flora-emerald);
-    color: var(--text-inverse);
-    border-color: var(--flora-emerald);
-}
-
-.dock-sprout-svg {
-    stroke: var(--flora-emerald);
-    transition: stroke 0.25s ease, transform 0.3s var(--ease-spring);
-}
-
-.dock-garden-brand:hover .dock-sprout-svg {
-    stroke: var(--text-inverse);
-    transform: scale(1.15) rotate(6deg);
-}
-
-.dock-brand-name {
-    font-family: var(--font-display);
-    letter-spacing: -0.01em;
-}
-
-/* Dock Navigation Links Row */
-.dock-links-row {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-.dock-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.65rem;
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.82rem;
-    font-weight: 500;
-    border-radius: var(--radius-pill);
-    transition: all 0.2s ease;
-}
-
-.dock-link-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-subtle);
-    opacity: 0.4;
-    transition: all 0.25s var(--ease-spring);
-}
-
-.dock-link:hover {
-    color: var(--text-primary);
-    background: var(--flora-emerald-soft);
-}
-
-.dock-link:hover .dock-link-dot {
-    background: var(--flora-emerald);
-    opacity: 0.9;
-    transform: scale(1.25);
-}
-
-.dock-link.is-active {
-    color: var(--flora-emerald);
-    background: var(--flora-emerald-soft);
-    font-weight: 600;
-}
-
-.dock-link.is-active .dock-link-dot {
-    background: var(--flora-emerald);
-    opacity: 1;
-    transform: scale(1.3);
-    box-shadow: 0 0 8px var(--flora-emerald-glow);
-}
-
-/* System Controls Row */
-.dock-controls-row {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding-left: 0.4rem;
-    border-left: 1px solid var(--border-hairline);
-}
-
-/* Mode Switch: Garden vs CLI */
+/* 1. Mode Switch: Garden GUI vs CLI */
 .dock-mode-switch {
     display: inline-flex;
-    background: rgba(24, 35, 30, 0.05);
-    border: 1px solid var(--border-hairline);
+    align-items: center;
+    background: rgba(24, 35, 30, 0.08);
+    border: 1px solid var(--border-card);
     padding: 2px;
     border-radius: var(--radius-pill);
     gap: 2px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .dock-mode-switch {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 .dock-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    padding: 0.25rem 0.6rem;
+    padding: 0.26rem 0.62rem;
     border-radius: var(--radius-pill);
     border: none;
     background: transparent;
     color: var(--text-muted);
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s var(--ease-out-expo);
+    white-space: nowrap;
 }
 
 .dock-btn:hover {
@@ -618,54 +548,141 @@ body.garden-body {
 .dock-btn.is-active {
     background: var(--bg-card-solid);
     color: var(--flora-emerald);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .dock-btn.is-active {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34D399;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .dock-btn-icon {
     font-size: 0.85rem;
 }
 
-/* Util Buttons */
+/* 2, 3, 4. Util Glass Pill Buttons (Music, Theme, Identity) */
 .dock-util-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.28rem 0.6rem;
+    gap: 0.35rem;
+    padding: 0.32rem 0.68rem;
     border-radius: var(--radius-pill);
-    border: 1px solid var(--border-hairline);
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 0.76rem;
-    font-weight: 500;
+    border: 1px solid var(--border-card);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+    transition: all 0.22s ease;
+}
+
+[data-theme="dark"] .dock-util-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #E2E8F0;
 }
 
 .dock-util-btn:hover {
-    background: var(--flora-emerald-soft);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--flora-emerald);
     color: var(--text-primary);
-    border-color: var(--border-card);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .dock-util-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--flora-emerald);
+    color: #FFFFFF;
 }
 
 .dock-util-btn.is-active {
     background: var(--flora-emerald-soft);
     border-color: var(--flora-emerald);
     color: var(--flora-emerald);
+    box-shadow: 0 0 12px var(--flora-emerald-glow);
 }
 
-/* Rohtak IST Live Clock Capsule */
+[data-theme="dark"] .dock-util-btn.is-active {
+    background: rgba(52, 211, 153, 0.18);
+    border-color: #34D399;
+    color: #34D399;
+}
+
+/* 5. Unique Visitor Views Capsule (1 per device) */
+.dock-views-capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.68rem;
+    border-radius: var(--radius-pill);
+    background: var(--flora-emerald-soft);
+    border: 1px solid rgba(46, 125, 90, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    user-select: none;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+    transition: border-color 0.25s ease;
+}
+
+[data-theme="dark"] .dock-views-capsule {
+    background: rgba(52, 211, 153, 0.12);
+    border-color: rgba(52, 211, 153, 0.3);
+    color: #D1FAE5;
+}
+
+.views-icon {
+    font-size: 0.85rem;
+}
+
+.views-count-val {
+    font-weight: 700;
+    color: var(--flora-emerald);
+}
+
+[data-theme="dark"] .views-count-val {
+    color: #34D399;
+}
+
+.views-txt {
+    font-size: 0.72rem;
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* 6. Rohtak IST Live Clock Capsule */
 .dock-clock-capsule {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.25rem 0.65rem;
+    padding: 0.32rem 0.68rem;
     border-radius: var(--radius-pill);
-    background: var(--flora-emerald-soft);
-    border: 1px solid rgba(46, 125, 90, 0.15);
+    background: rgba(46, 125, 90, 0.08);
+    border: 1px solid rgba(46, 125, 90, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--flora-emerald);
+    white-space: nowrap;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .dock-clock-capsule {
+    background: rgba(52, 211, 153, 0.10);
+    border-color: rgba(52, 211, 153, 0.25);
+    color: #34D399;
 }
 
 .clock-pin-icon {
@@ -2399,29 +2416,17 @@ body.garden-body {
    -------------------------------------------------------------------------- */
 /* Large Laptops & Medium Desktops (<= 1280px) */
 @media (max-width: 1280px) {
-    .dock-clock-capsule {
-        display: none;
-    }
-
     .garden-floating-dock {
-        gap: 0.85rem;
-        padding: 0.4rem 0.8rem;
+        gap: 0.5rem;
+        padding: 0.35rem 0.65rem;
     }
 }
 
 /* Laptops & Tablets Landscape (<= 1080px) */
 @media (max-width: 1080px) {
-    .dock-util-label {
-        display: none;
-    }
-
-    .dock-links-row {
-        gap: 0.15rem;
-    }
-
-    .dock-link {
-        padding: 0.32rem 0.55rem;
-        font-size: 0.78rem;
+    .garden-floating-dock {
+        gap: 0.45rem;
+        padding: 0.32rem 0.6rem;
     }
 
     .projects-botanical-grid {
@@ -2445,55 +2450,34 @@ body.garden-body {
 /* Tablets Portrait & Large Phones (<= 768px) */
 @media (max-width: 768px) {
     .garden-floating-dock {
-        top: 0.85rem;
-        bottom: auto;
+        top: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
-        width: calc(100vw - 1.5rem);
-        max-width: 440px;
-        padding: 0.4rem 0.85rem;
-        gap: 0.6rem;
-        justify-content: space-between;
-        box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 0 1px rgba(52, 211, 153, 0.4);
+        width: max-content;
+        max-width: calc(100vw - 1rem);
+        padding: 0.3rem 0.55rem;
+        gap: 0.4rem;
+        justify-content: flex-start;
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.4), var(--glass-specular);
         z-index: 10000;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .dock-garden-brand {
-        display: inline-flex;
-        padding: 0.25rem 0.55rem;
-        font-size: 0.82rem;
-    }
-
-    /* Hide horizontal link row in favor of 3-dots menu on mobile */
-    .dock-links-row {
-        display: none !important;
-    }
-
-    .dock-controls-row {
-        border-left: none;
-        padding-left: 0;
-        gap: 0.35rem;
-    }
-
-    .dock-mode-switch {
-        display: none;
+    .dock-btn {
+        padding: 0.22rem 0.5rem;
+        font-size: 0.74rem;
     }
 
     .dock-util-btn {
-        padding: 0.3rem 0.5rem;
+        padding: 0.25rem 0.55rem;
+        font-size: 0.74rem;
     }
 
-    .dock-util-btn .dock-util-label {
-        display: none;
-    }
-
+    .dock-views-capsule,
     .dock-clock-capsule {
-        display: none;
-    }
-
-    /* Show 3-Dots Menu Button */
-    .dock-mobile-menu-btn {
-        display: inline-flex;
+        padding: 0.25rem 0.55rem;
+        font-size: 0.74rem;
     }
 
     .garden-hero-section {
