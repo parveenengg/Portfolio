@@ -20,6 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
     "use strict";
 
     /* ==========================================================================
+       Rohtak IST Time Calculation (Asia/Kolkata, UTC+5:30)
+       Evening/Night: 18:00 to 06:00 IST -> Dark Theme
+       Daytime: 06:00 to 18:00 IST -> Light Mode
+       ========================================================================== */
+    function getISTTime() {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const istDate = new Date(utc + (3600000 * 5.5));
+        const hours = istDate.getHours();
+        const minutes = istDate.getMinutes();
+        const seconds = istDate.getSeconds();
+        const decimalHour = hours + minutes / 60 + seconds / 3600;
+        const isEveningOrNight = hours >= 18 || hours < 6;
+        return { istDate, hours, minutes, seconds, decimalHour, isEveningOrNight };
+    }
+
+    /* ==========================================================================
        01. Master Structured Portfolio Data (Unified Source of Truth)
        ========================================================================== */
     const portfolioData = {
@@ -37,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
             github: "https://github.com/parveenengg",
             linkedin: "https://linkedin.com/in/parveenkumar--/",
             leetcode: "https://leetcode.com/u/parveen_engi/",
-            instagram: "https://www.instagram.com/parveen.tv/"
+            instagram: "https://www.instagram.com/parveen.tv/",
+            favoriteTrack: "Dil Ne Yeh Kaha Hain Dil Se by Udit Narayan & Alka Yagnik (Dhadkan) [Personal All-Time Favourite]"
         },
         projects: [
             {
@@ -109,43 +127,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 id: "node-proj-01",
                 track: "projects",
                 trackLabel: "01 / LIVE PLATFORM",
-                period: "2025 – PRESENT",
-                yearLabel: "2025–Present",
+                period: "2025 – 2026",
+                yearLabel: "2025–2026",
                 title: "Obvious-Choice — Founder Digital Platform",
-                org: "Public Production Platform",
-                summary: "Engineered a zero-dependency high-conversion web presence system for founders, achieving 99+ Google Lighthouse scores and fluid typography using pure native HTML5, CSS3, and JavaScript.",
-                details: "Designed and implemented a 5-stage client positioning framework and 6-stage acquisition funnel. Built responsive CSS architecture, newsletter capture endpoints, and structured technical copywriting. Operating live at obvious-choice.parveenmakwana.in.",
+                org: "Production Platform • Built during B.Tech",
+                summary: "Engineered a zero-dependency high-conversion web presence system for founders during B.Tech, achieving 99+ Google Lighthouse scores and fluid typography using pure native HTML5, CSS3, and JavaScript.",
+                details: "Designed and implemented a 5-stage client positioning framework and 6-stage acquisition funnel during B.Tech studies. Built responsive CSS architecture, newsletter capture endpoints, and structured technical copywriting. Operating live at obvious-choice.parveenmakwana.in.",
                 image: "assets/project-obvious-choice.png",
                 link: "https://obvious-choice.parveenmakwana.in/",
                 linkText: "Visit Live Platform →",
                 tags: ["Web Architecture", "JavaScript", "Funnel Mechanics", "UI/UX", "Responsive Design"]
             },
             {
-                id: "node-edu-03",
-                track: "education",
-                trackLabel: "02 / DEGREE PURSUIT",
-                period: "2024 – PRESENT (Exp. 2027)",
-                yearLabel: "2024–2027",
-                title: "B.Tech in Computer Science & Engineering",
-                org: "Maharshi Dayanand University (MDU), Rohtak",
-                summary: "Pursuing undergraduate degree in Computer Science, deepening algorithmic problem solving and distributed system architectures.",
-                details: "Undergraduate degree program focusing on software engineering principles, distributed systems, advanced algorithms, compiler fundamentals, and database internals. Target graduation in 2027.",
-                tags: ["Computer Science", "Algorithms", "Distributed Systems", "Software Engineering"]
-            },
-            {
                 id: "node-proj-02",
                 track: "projects",
-                trackLabel: "03 / SHIPPED MVP",
-                period: "2024 – 2025",
-                yearLabel: "2024–2025",
+                trackLabel: "02 / SHIPPED MVP",
+                period: "2025 – 2026",
+                yearLabel: "2025–2026",
                 title: "Orbit Browser — Multi-Platform Client MVP",
-                org: "Flagship Software Application",
-                summary: "Functional cross-platform browser MVP built with Flutter & Dart in a rapid 2-week sprint, with live APK distribution site.",
-                details: "Engineered webview lifecycle controllers, responsive browser tab chrome, URL parsing, bookmark management, and custom celestial particle visual branding. Android APK builds distributed via GitHub Releases; live distribution site at orbit.parveenmakwana.in.",
+                org: "Flagship Software Application • Built during B.Tech",
+                summary: "Functional cross-platform browser MVP built with Flutter & Dart during B.Tech studies, with live APK distribution site and SQLite persistence.",
+                details: "Engineered webview lifecycle controllers, responsive browser tab chrome, URL parsing, bookmark management, and custom celestial particle visual branding during B.Tech studies. Android APK builds distributed via GitHub Releases; live distribution site at orbit.parveenmakwana.in.",
                 image: "assets/project-orbit.jpg",
                 link: "https://orbit.parveenmakwana.in/",
                 linkText: "Visit Orbit Live Site →",
                 tags: ["Flutter", "Dart", "InAppWebView", "Android APK", "Product Architecture"]
+            },
+            {
+                id: "node-edu-03",
+                track: "education",
+                trackLabel: "03 / DEGREE PURSUIT",
+                period: "2024 – PRESENT (Exp. 2027)",
+                yearLabel: "2024–2027",
+                title: "B.Tech in Computer Science & Engineering",
+                org: "Maharshi Dayanand University (MDU), Rohtak",
+                summary: "Pursuing undergraduate degree in Computer Science, engineering production systems (Orbit Browser & Obvious-Choice) alongside theoretical algorithms and distributed systems.",
+                details: "Undergraduate degree program focusing on software engineering principles, distributed systems, advanced algorithms, compiler fundamentals, and database internals. Target graduation in 2027.",
+                tags: ["Computer Science", "Algorithms", "Distributed Systems", "Software Engineering"]
             },
             {
                 id: "node-exp-02",
@@ -484,51 +502,141 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function setSoundState(enabled) {
-        soundEnabled = !!enabled;
-        if (soundEnabled) {
-            initAudio();
-            startCalmGardenMusic();
-            soundFX.softClick();
-        } else {
-            stopCalmGardenMusic();
-        }
+    // --- FLIGHT DECK MUSIC ENGINE (Dil Ne Yeh Kaha - Udit Narayan & Alka Yagnik + Garden Chimes) ---
+    let currentMusicTrack = "dilne"; // "dilne" (Parveen's Favourite) | "chimes"
+    const musicDrawer = document.getElementById("music-capsule-drawer");
+    const musicDrawerClose = document.getElementById("music-drawer-close");
+    const trackItemDilNe = document.getElementById("track-item-dilne");
+    const trackItemChimes = document.getElementById("track-item-chimes");
+    const musicMainPlayBtn = document.getElementById("music-main-play-btn");
+    const musicMainPlayIcon = document.getElementById("music-main-play-icon");
+    const musicMainPlayTxt = document.getElementById("music-main-play-txt");
+    const eqDilNe = document.getElementById("eq-dilne");
+    const eqChimes = document.getElementById("eq-chimes");
+    const musicPulseIndicator = document.getElementById("music-pulse-indicator");
 
-        // Update HUD sound button
+    function sendYTCommand(command, args = []) {
+        const iframe = document.getElementById("music-yt-frame");
+        if (iframe && iframe.contentWindow) {
+            try {
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    event: "command",
+                    func: command,
+                    args: args
+                }), "*");
+            } catch (e) { }
+        }
+    }
+
+    function openMusicDrawer() {
+        if (musicDrawer) {
+            musicDrawer.classList.add("is-open");
+            musicDrawer.setAttribute("aria-hidden", "false");
+        }
+    }
+
+    function closeMusicDrawer() {
+        if (musicDrawer) {
+            musicDrawer.classList.remove("is-open");
+            musicDrawer.setAttribute("aria-hidden", "true");
+        }
+    }
+
+    function updateMusicUI() {
         const soundBtn = document.getElementById("sound-toggle-btn");
         const soundIcon = document.getElementById("sound-icon");
         const soundLabel = document.getElementById("sound-label");
+        const ctxMusicIcon = document.getElementById("ctx-music-icon");
+        const ctxMusicTitle = document.getElementById("ctx-music-title");
+        const ctxMusicSub = document.getElementById("ctx-music-sub");
+
+        const isDilNe = currentMusicTrack === "dilne";
+
+        if (trackItemDilNe) trackItemDilNe.classList.toggle("is-selected", isDilNe);
+        if (trackItemChimes) trackItemChimes.classList.toggle("is-selected", !isDilNe);
 
         if (soundBtn) {
             soundBtn.classList.toggle("is-active", soundEnabled);
             soundBtn.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+            soundBtn.setAttribute("title", soundEnabled
+                ? `Now Playing: ${isDilNe ? '"Dil Ne Yeh Kaha Hain Dil Se" by Udit Narayan & Alka Yagnik (Parveen\'s Favourite ⭐)' : '"Garden Chimes" (Peaceful)'} — Click to open audio player`
+                : "Music Player & Audio Deck (Click to play / choose track)");
         }
-        if (soundIcon) soundIcon.textContent = soundEnabled ? "🎵" : "🔈";
-        if (soundLabel) soundLabel.textContent = soundEnabled ? "Music On" : "Music Off";
 
-        // Update Gateway sound button
-        const gwSoundBtn = document.getElementById("gateway-sound-btn");
-        const gwSoundIcon = document.getElementById("gateway-sound-icon");
-        const gwSoundTxt = document.getElementById("gateway-sound-txt");
-
-        if (gwSoundBtn) {
-            gwSoundBtn.classList.toggle("is-active", soundEnabled);
+        if (soundIcon) {
+            soundIcon.textContent = soundEnabled ? (isDilNe ? "💖" : "🌿") : "🎵";
         }
-        if (gwSoundIcon) gwSoundIcon.textContent = soundEnabled ? "🎵" : "🔈";
-        if (gwSoundTxt) gwSoundTxt.textContent = soundEnabled ? "Music: On" : "Music: Off";
-
-        // Update Mobile Drawer sound button
-        const mSoundBtn = document.getElementById("m-sound-btn");
-        const mSoundIcon = document.getElementById("m-sound-icon");
-        const mSoundTxt = document.getElementById("m-sound-txt");
-        if (mSoundBtn) {
-            mSoundBtn.classList.toggle("is-active", soundEnabled);
+        if (soundLabel) {
+            soundLabel.textContent = soundEnabled ? (isDilNe ? "Dil Ne Yeh Kaha" : "Chimes") : "Music Off";
         }
-        if (mSoundIcon) mSoundIcon.textContent = soundEnabled ? "🎵" : "🔈";
-        if (mSoundTxt) mSoundTxt.textContent = soundEnabled ? "Music On" : "Music Off";
+
+        // Drawer Controls
+        if (musicMainPlayIcon) musicMainPlayIcon.textContent = soundEnabled ? "⏸" : "▶";
+        if (musicMainPlayTxt) {
+            musicMainPlayTxt.textContent = soundEnabled
+                ? `Pause ${isDilNe ? "Dil Ne Yeh Kaha" : "Garden Chimes"}`
+                : `Play ${isDilNe ? "Dil Ne Yeh Kaha" : "Garden Chimes"}`;
+        }
+
+        if (eqDilNe) eqDilNe.classList.toggle("is-active", soundEnabled && isDilNe);
+        if (eqChimes) eqChimes.classList.toggle("is-active", soundEnabled && !isDilNe);
+        if (musicPulseIndicator) musicPulseIndicator.classList.toggle("is-playing", soundEnabled);
+
+        // Context Menu Item
+        if (ctxMusicIcon) ctxMusicIcon.textContent = soundEnabled ? "⏸️" : "🎵";
+        if (ctxMusicTitle) {
+            ctxMusicTitle.textContent = soundEnabled ? "Pause Music" : 'Play "Dil Ne Yeh Kaha"';
+        }
+        if (ctxMusicSub) {
+            ctxMusicSub.textContent = soundEnabled
+                ? `Playing: ${isDilNe ? "Dil Ne Yeh Kaha (Udit & Alka ⭐)" : "Garden Chimes"}`
+                : "Udit Narayan • Alka Yagnik (Parveen's Favourite ⭐)";
+        }
+    }
+
+    function setMusicTrack(trackName) {
+        currentMusicTrack = trackName;
+        if (soundEnabled) {
+            if (trackName === "dilne") {
+                stopCalmGardenMusic();
+                sendYTCommand("playVideo");
+            } else {
+                sendYTCommand("pauseVideo");
+                startCalmGardenMusic();
+            }
+        }
+        updateMusicUI();
+        try {
+            localStorage.setItem("parveen_sound_track", trackName);
+        } catch (e) { }
+    }
+
+    function setSoundState(enabled, trackToPlay = null) {
+        soundEnabled = !!enabled;
+        if (trackToPlay) {
+            currentMusicTrack = trackToPlay;
+        }
+
+        if (soundEnabled) {
+            initAudio();
+            if (currentMusicTrack === "dilne") {
+                stopCalmGardenMusic();
+                sendYTCommand("playVideo");
+            } else {
+                sendYTCommand("pauseVideo");
+                startCalmGardenMusic();
+            }
+            soundFX.softClick();
+        } else {
+            sendYTCommand("pauseVideo");
+            stopCalmGardenMusic();
+        }
+
+        updateMusicUI();
 
         try {
             localStorage.setItem("parveen_sound_pref", soundEnabled ? "on" : "off");
+            localStorage.setItem("parveen_sound_track", currentMusicTrack);
         } catch (e) { }
     }
 
@@ -539,23 +647,83 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, { passive: true });
 
-    // Sound button event bindings
+    // Flight Deck Sound button event bindings
     const soundToggleBtn = document.getElementById("sound-toggle-btn");
     if (soundToggleBtn) {
-        soundToggleBtn.addEventListener("click", () => setSoundState(!soundEnabled));
+        soundToggleBtn.addEventListener("click", () => {
+            if (!soundEnabled) {
+                setSoundState(true, currentMusicTrack);
+                openMusicDrawer();
+            } else {
+                // If already playing, toggle drawer or toggle playback
+                if (musicDrawer && musicDrawer.classList.contains("is-open")) {
+                    setSoundState(false);
+                } else {
+                    openMusicDrawer();
+                }
+            }
+        });
     }
-    const gatewaySoundBtn = document.getElementById("gateway-sound-btn");
-    if (gatewaySoundBtn) {
-        gatewaySoundBtn.addEventListener("click", () => setSoundState(!soundEnabled));
+
+    if (musicDrawerClose) {
+        musicDrawerClose.addEventListener("click", closeMusicDrawer);
     }
+
+    if (trackItemDilNe) {
+        trackItemDilNe.addEventListener("click", () => {
+            setMusicTrack("dilne");
+            if (!soundEnabled) setSoundState(true, "dilne");
+        });
+    }
+
+    if (trackItemChimes) {
+        trackItemChimes.addEventListener("click", () => {
+            setMusicTrack("chimes");
+            if (!soundEnabled) setSoundState(true, "chimes");
+        });
+    }
+
+    if (musicMainPlayBtn) {
+        musicMainPlayBtn.addEventListener("click", () => {
+            setSoundState(!soundEnabled, currentMusicTrack);
+        });
+    }
+
+    // Close music drawer when clicking outside or pressing Escape
+    document.addEventListener("click", (e) => {
+        if (musicDrawer && musicDrawer.classList.contains("is-open")) {
+            const isInside = musicDrawer.contains(e.target) || (soundToggleBtn && soundToggleBtn.contains(e.target));
+            if (!isInside) {
+                closeMusicDrawer();
+            }
+        }
+    });
+
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeMusicDrawer();
+        }
+        if ((e.key === "m" || e.key === "M") && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+            setSoundState(!soundEnabled);
+            if (soundEnabled) openMusicDrawer();
+        }
+    });
 
     // Check saved sound preference
     try {
+        const savedTrack = localStorage.getItem("parveen_sound_track");
+        if (savedTrack === "dilne" || savedTrack === "chimes") {
+            currentMusicTrack = savedTrack;
+        }
         const savedSound = localStorage.getItem("parveen_sound_pref");
         if (savedSound === "on") {
             setSoundState(true);
+        } else {
+            updateMusicUI();
         }
-    } catch (e) { }
+    } catch (e) {
+        updateMusicUI();
+    }
 
     /* ==========================================================================
        03. Dual View State Switcher (Modern GUI vs Terminal CLI)
@@ -735,23 +903,67 @@ document.addEventListener("DOMContentLoaded", () => {
         deckTermTrigger.addEventListener("click", () => setMode("terminal"));
     }
 
-    // Top Flight Deck Theme Toggle & Display Sync
+    // Top Flight Deck Theme Toggle & Automatic Time-of-Day Sync
     const deckThemeBtn = document.getElementById("theme-toggle-btn");
+
     function updateThemeBtnDisplay(theme) {
         const themeIcon = document.getElementById("theme-icon");
         const themeLabel = document.getElementById("theme-label");
         const isDark = theme === "dark";
-        if (themeIcon) themeIcon.textContent = isDark ? "🌙" : "🌓";
+        if (themeIcon) themeIcon.textContent = isDark ? "🌙" : "☀️";
         if (themeLabel) themeLabel.textContent = isDark ? "Dark" : "Light";
         if (deckThemeBtn) {
             deckThemeBtn.setAttribute("aria-label", `Toggle Nature Theme (Current: ${isDark ? "Dark" : "Light"})`);
+            deckThemeBtn.setAttribute("title", `Theme: ${isDark ? "Twilight / Dark" : "Daylight / Light"} (Click to switch manually)`);
         }
+
+        // Also update Right-Click Context Menu items
+        const ctxThemeIcon = document.getElementById("ctx-theme-icon");
+        const ctxThemeTitle = document.getElementById("ctx-theme-title");
+        const ctxThemeSub = document.getElementById("ctx-theme-sub");
+        if (ctxThemeIcon) ctxThemeIcon.textContent = isDark ? "☀️" : "🌙";
+        if (ctxThemeTitle) ctxThemeTitle.textContent = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
+        if (ctxThemeSub) ctxThemeSub.textContent = isDark ? "Daylight Meadow Sky" : "Twilight & Starry Night";
     }
 
-    // Initialize theme button state from active DOM / stored preference
-    const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
-    updateThemeBtnDisplay(initialTheme);
+    // Apply auto time-based theme (Evening/Night 18:00–06:00 IST => Dark, Day => Light) or user manual preference
+    function syncTimeBasedTheme() {
+        const userManualPref = localStorage.getItem("parveen_theme_pref");
+        let activeTheme;
+        if (userManualPref === "light" || userManualPref === "dark") {
+            activeTheme = userManualPref;
+        } else {
+            const ist = getISTTime();
+            // Evening or Night (18:00 to 06:00 IST) => Dark; Daytime (06:00 to 18:00 IST) => Light
+            activeTheme = ist.isEveningOrNight ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", activeTheme);
+        updateThemeBtnDisplay(activeTheme);
+        return activeTheme;
+    }
 
+    // Initialize on page load
+    syncTimeBasedTheme();
+
+    // Check periodically every 30s to transition automatically when time crosses 18:00 or 06:00 IST if user hasn't overridden
+    setInterval(() => {
+        const userManualPref = localStorage.getItem("parveen_theme_pref");
+        if (!userManualPref) {
+            syncTimeBasedTheme();
+        }
+    }, 30000);
+
+    // Listen to OS system color-scheme changes only if user hasn't explicitly set a preference
+    if (window.matchMedia) {
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+            const userManualPref = localStorage.getItem("parveen_theme_pref");
+            if (!userManualPref) {
+                syncTimeBasedTheme();
+            }
+        });
+    }
+
+    // Manual CTA Theme Toggle Handler
     if (deckThemeBtn) {
         deckThemeBtn.addEventListener("click", () => {
             const html = document.documentElement;
@@ -1062,6 +1274,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "gui",
         "modern",
         "sound",
+        "music",
+        "resume",
+        "cv",
         "snapshot",
         "clear",
         "cls"
@@ -1167,16 +1382,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
 
             case "sound":
-                if (arg === "on" || arg === "enable") {
+            case "music":
+                if (arg === "on" || arg === "enable" || arg === "play") {
                     setSoundState(true);
-                    renderCommandOutput(trimmed, `<p style="color: #3FB950;">[OK] Web Audio SFX enabled.</p>`);
-                } else if (arg === "off" || arg === "disable") {
+                    openMusicDrawer();
+                    renderCommandOutput(trimmed, `
+                        <p style="color: #34D399; font-weight: 700;">[OK] Audio Flight Deck Activated</p>
+                        <p>▶ Now Playing: <strong>${currentMusicTrack === "dilne" ? '"Dil Ne Yeh Kaha Hain Dil Se" by Udit Narayan & Alka Yagnik (Parveen\'s Favourite ⭐)' : '"Garden Chimes"'}</strong></p>
+                    `);
+                } else if (arg === "off" || arg === "disable" || arg === "pause" || arg === "stop") {
                     setSoundState(false);
-                    renderCommandOutput(trimmed, `<p style="color: #8B949E;">[OK] Web Audio SFX disabled.</p>`);
+                    renderCommandOutput(trimmed, `<p style="color: #8B949E;">[OK] Audio Engine paused.</p>`);
+                } else if (arg === "dilne" || arg === "dhadkan" || arg === "udit" || arg === "alka") {
+                    setMusicTrack("dilne");
+                    setSoundState(true, "dilne");
+                    openMusicDrawer();
+                    renderCommandOutput(trimmed, `
+                        <p style="color: #F59E0B; font-weight: 700;">⭐ PARVEEN'S PERSONAL FAVOURITE SELECTED</p>
+                        <p>▶ Playing: <strong>"Dil Ne Yeh Kaha Hain Dil Se" &mdash; Udit Narayan &amp; Alka Yagnik</strong> (Romantic Classic &bull; Dhadkan)</p>
+                    `);
+                } else if (arg === "chimes" || arg === "kalimba") {
+                    setMusicTrack("chimes");
+                    setSoundState(true, "chimes");
+                    renderCommandOutput(trimmed, `
+                        <p style="color: #34D399; font-weight: 700;">🌿 ACOUSTIC FOCUS TRACK SELECTED</p>
+                        <p>▶ Playing: <strong>"Garden Chimes"</strong> (Peaceful Generative Kalimba Motifs)</p>
+                    `);
                 } else {
                     const nextState = !soundEnabled;
                     setSoundState(nextState);
-                    renderCommandOutput(trimmed, `<p style="color: ${nextState ? "#3FB950" : "#8B949E"};">[OK] Web Audio SFX is now: <strong>${nextState ? "ON" : "OFF"}</strong> (Usage: <code class="term-code-cmd">sound on</code> or <code class="term-code-cmd">sound off</code>)</p>`);
+                    if (nextState) openMusicDrawer();
+                    renderCommandOutput(trimmed, `
+                        <p style="color: #34D399; font-weight: 700;">FLIGHT DECK AUDIO ENGINE &bull; STATUS: ${nextState ? "PLAYING" : "PAUSED"}</p>
+                        <p>1. <strong style="color: #F59E0B;">"Dil Ne Yeh Kaha Hain Dil Se"</strong> &mdash; Udit Narayan &amp; Alka Yagnik <span style="color: #F59E0B;">[⭐ Parveen's Personal Favourite]</span> (<code class="term-code-cmd">music dilne</code>)</p>
+                        <p>2. <strong>"Garden Chimes"</strong> &mdash; Procedural Ambient Kalimba (<code class="term-code-cmd">music chimes</code>)</p>
+                        <p style="color: #94A3B8; font-size: 0.85em;">Shortcuts: <code class="term-code-cmd">music on</code>, <code class="term-code-cmd">music off</code>, or click dock button [M]</p>
+                    `);
                 }
                 break;
 
@@ -1185,6 +1426,15 @@ document.addEventListener("DOMContentLoaded", () => {
             case "modal":
                 renderCommandOutput(trimmed, `<p style="color: #58A6FF;">&rarr; Opening verified profile snapshot modal...</p>`);
                 openProfileModal();
+                break;
+
+            case "resume":
+            case "cv":
+                renderCommandOutput(trimmed, `
+                    <p style="color: #34D399; font-weight: 700;">&rarr; Opening verified original 1-page resume viewer...</p>
+                    <p style="color: #94A3B8; font-size: 0.85em;">Direct file: <a href="assets/Parveen_Makwana_Resume.pdf" target="_blank" style="color: #58A6FF;">Parveen_Kumar_Resume.pdf</a></p>
+                `);
+                openResumeViewer();
                 break;
 
             case "clear":
@@ -1422,134 +1672,157 @@ document.addEventListener("DOMContentLoaded", () => {
         let stars = [];
         let fireflies = [];
 
-        // --- TIME-OF-DAY & SKY LIGHTING SYSTEM (Rohtak IST UTC+5:30) ---
-        function getISTTime() {
-            const now = new Date();
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const istDate = new Date(utc + (3600000 * 5.5));
-            const hours = istDate.getHours();
-            const minutes = istDate.getMinutes();
-            const seconds = istDate.getSeconds();
-            const decimalHour = hours + minutes / 60 + seconds / 3600;
-            return { istDate, hours, minutes, seconds, decimalHour };
-        }
-
+        // --- TIME-OF-DAY & DYNAMIC SKY LIGHTING ENGINE (5 Real-Time Celestial Phases) ---
         function getSkyLighting(h, isDarkTheme) {
-            let phase = "day";
-            let skyTop = "#D8EEFD";
-            let skyMid = "#EDE9FE";
-            let skyBottom = "#FFFDF0";
-            let sunAlpha = 1.0;
-            let moonAlpha = 0.0;
-            let starsAlpha = 0.0;
-            let fireflyAlpha = 0.0;
+            let phase = isDarkTheme ? "night" : "day";
+            let skyTop, skyMid, skyBottom;
+            let sunAlpha = 0, moonAlpha = 0, starsAlpha = 0, fireflyAlpha = 0;
             let cloudTint = "rgba(255, 255, 255,";
-            let sunX = width * 0.5;
-            let sunY = 95;
-            let sunColor = "#FBBF24";
-            let sunCorona = "rgba(253, 230, 138, 0.4)";
-            let moonX = width * 0.8;
-            let moonY = 85;
-            let groundFar = "#7EBC9A";
-            let groundNear = "#559672";
-            let turfAccent = "#A8E2BF";
+            let sunX = width * 0.5, sunY = 95;
+            let sunColor = "#FBBF24", sunCorona = "rgba(253, 230, 138, 0.4)";
+            let moonX = width * 0.82, moonY = 82;
+            let groundFar = "#7EBC9A", groundNear = "#559672", turfAccent = "#A8E2BF";
             let groundHighlight = "rgba(220, 252, 231, 0.65)";
 
-            if (h >= 5.0 && h < 7.5) {
-                // DAWN / SUNRISE (5:00 AM - 7:30 AM): Soft lilac mist & warm peach dawn
-                phase = "dawn";
-                const p = (h - 5.0) / 2.5;
-                skyTop = "#2E1E45";
-                skyMid = "#D9779F";
-                skyBottom = "#FEF08A";
-                sunAlpha = Math.min(1.0, p * 1.4);
-                moonAlpha = Math.max(0, 1 - p * 2);
-                starsAlpha = Math.max(0, 1 - p * 1.5);
-                fireflyAlpha = Math.max(0, 0.5 - p);
-                cloudTint = "rgba(254, 205, 211,";
-                sunX = width * 0.2 + p * (width * 0.15);
-                sunY = height * 0.4 - p * (height * 0.15);
-                sunColor = "#FBBF24";
-                sunCorona = "rgba(251, 146, 60, 0.4)";
-                groundFar = "#658B79";
-                groundNear = "#466757";
-                turfAccent = "#A5CDB8";
-                groundHighlight = "rgba(254, 240, 138, 0.5)";
-            } else if (h >= 7.5 && h < 16.5) {
-                // DAYTIME (7:30 AM - 4:30 PM): Soft watercolor sky & charming sunny sage meadow
-                phase = "day";
-                const p = (h - 7.5) / 9.0;
-                skyTop = isDarkTheme ? "#1E293B" : "#D8EEFD";
-                skyMid = isDarkTheme ? "#0F172A" : "#EDE9FE";
-                skyBottom = isDarkTheme ? "#12281E" : "#FFFDF0";
-                sunAlpha = isDarkTheme ? 0.35 : 1.0;
-                moonAlpha = 0.0;
-                starsAlpha = isDarkTheme ? 0.25 : 0.0;
-                fireflyAlpha = 0.0;
-                cloudTint = isDarkTheme ? "rgba(71, 85, 105," : "rgba(255, 255, 255,";
-                sunX = width * 0.18 + p * (width * 0.64);
-                sunY = 85 + Math.sin(p * Math.PI) * -35;
-                sunColor = "#FBBF24";
-                sunCorona = "rgba(253, 230, 138, 0.45)";
-                groundFar = isDarkTheme ? "#183C2A" : "#7EBC9A";
-                groundNear = isDarkTheme ? "#0E261A" : "#559672";
-                turfAccent = isDarkTheme ? "#2E6D4B" : "#A8E2BF";
-                groundHighlight = isDarkTheme ? "rgba(110, 231, 183, 0.25)" : "rgba(220, 252, 231, 0.65)";
-            } else if (h >= 16.5 && h < 19.0) {
-                // SUNSET / GOLDEN HOUR (4:30 PM - 7:00 PM): Warm peach amber & golden rolling hills
-                phase = "sunset";
-                const p = (h - 16.5) / 2.5;
-                skyTop = "#432C5E";
-                skyMid = "#F472B6";
-                skyBottom = "#FED7AA";
-                sunAlpha = Math.max(0.4, 1.0 - p * 0.5);
-                moonAlpha = p * 0.4;
-                starsAlpha = p * 0.5;
-                fireflyAlpha = p * 0.6;
-                cloudTint = "rgba(253, 186, 116,";
-                sunX = width * 0.7 + p * (width * 0.18);
-                sunY = 95 + p * (height * 0.25);
-                sunColor = "#F97316";
-                sunCorona = "rgba(251, 146, 60, 0.5)";
-                groundFar = "#7C5F40";
-                groundNear = "#503D2A";
-                turfAccent = "#DCA76C";
-                groundHighlight = "rgba(254, 215, 170, 0.55)";
-            } else if (h >= 19.0 && h < 20.5) {
-                // TWILIGHT / DUSK (7:00 PM - 8:30 PM): Calming lavender dusk & serene hills
-                phase = "twilight";
-                const p = (h - 19.0) / 1.5;
-                skyTop = "#181A38";
-                skyMid = "#2B2E63";
-                skyBottom = "#3B3D78";
-                sunAlpha = 0.0;
-                moonAlpha = 0.75 + p * 0.25;
-                starsAlpha = 0.7 + p * 0.3;
-                fireflyAlpha = 0.8;
-                cloudTint = "rgba(99, 102, 241,";
-                moonX = width * 0.82;
-                moonY = 90;
-                groundFar = "#223C32";
-                groundNear = "#14261F";
-                turfAccent = "#3C6856";
-                groundHighlight = "rgba(165, 180, 252, 0.3)";
-            } else {
-                // NIGHT (8:30 PM - 5:00 AM): Soft velvet nocturnal moss & starlight
-                phase = "night";
-                skyTop = "#070D1B";
-                skyMid = "#0D1A2E";
-                skyBottom = "#122822";
-                sunAlpha = 0.0;
-                moonAlpha = 1.0;
-                starsAlpha = 1.0;
-                fireflyAlpha = 1.0;
-                cloudTint = "rgba(30, 41, 59,";
-                moonX = width * 0.82;
-                moonY = 85;
+            if (isDarkTheme) {
+                // Ground colors for dark nocturnal / twilight atmosphere
                 groundFar = "#142F23";
                 groundNear = "#0A1D15";
                 turfAccent = "#25523C";
-                groundHighlight = "rgba(167, 243, 208, 0.2)";
+                groundHighlight = "rgba(167, 243, 208, 0.25)";
+
+                if (h >= 18.0 && h < 19.2) {
+                    // EVENING TRANSITION: Sunset into Dusk Twilight (6:00 PM - 7:12 PM)
+                    phase = "sunset";
+                    const progress = (h - 18.0) / 1.2;
+                    skyTop = "#192244";
+                    skyMid = "#6B2C46";
+                    skyBottom = "#D46137";
+                    cloudTint = "rgba(255, 215, 185,";
+                    // Sinking sun on the right horizon
+                    sunX = width * (0.76 + progress * 0.12);
+                    sunY = 100 + progress * 50;
+                    sunColor = "#EA580C";
+                    sunCorona = "rgba(249, 115, 22, 0.5)";
+                    sunAlpha = Math.max(0, 0.65 * (1 - progress));
+                    // Moon rising in the east
+                    moonX = width * 0.82;
+                    moonY = 85;
+                    moonAlpha = 0.4 + progress * 0.5;
+                    starsAlpha = 0.3 + progress * 0.55;
+                    fireflyAlpha = 0.4 + progress * 0.45;
+                } else if (h >= 19.2 && h < 20.75) {
+                    // TWILIGHT / DUSK: Deep Indigo, Lavender & Starry Canopy (7:12 PM - 8:45 PM)
+                    phase = "twilight";
+                    skyTop = "#0C0E24";
+                    skyMid = "#1A1B43";
+                    skyBottom = "#231F3B";
+                    cloudTint = "rgba(45, 48, 85,";
+                    sunAlpha = 0.0;
+                    moonX = width * 0.80;
+                    moonY = 82;
+                    moonAlpha = 1.0;
+                    starsAlpha = 0.92;
+                    fireflyAlpha = 0.90;
+                } else if (h >= 5.0 && h < 6.0) {
+                    // PRE-DAWN TWILIGHT (5:00 AM - 6:00 AM)
+                    phase = "dawn-twilight";
+                    const progress = h - 5.0;
+                    skyTop = "#161D36";
+                    skyMid = "#2A2A4E";
+                    skyBottom = "#3D2B3F";
+                    cloudTint = "rgba(55, 52, 90,";
+                    sunAlpha = 0.1 * progress;
+                    moonX = width * 0.25;
+                    moonY = 88;
+                    moonAlpha = Math.max(0, 0.7 * (1 - progress));
+                    starsAlpha = Math.max(0.2, 0.7 * (1 - progress));
+                    fireflyAlpha = Math.max(0.2, 0.6 * (1 - progress));
+                } else {
+                    // NOCTURNAL MIDNIGHT (8:45 PM - 5:00 AM) or Manual Dark Mode during daytime
+                    phase = "night";
+                    skyTop = "#050811";
+                    skyMid = "#0A1424";
+                    skyBottom = "#0E221B";
+                    cloudTint = "rgba(24, 34, 52,";
+                    sunAlpha = 0.0;
+                    moonX = width * 0.78;
+                    moonY = 78;
+                    moonAlpha = 1.0;
+                    starsAlpha = 1.0;
+                    fireflyAlpha = 0.95;
+                    groundFar = "#0E241B";
+                    groundNear = "#06150F";
+                    turfAccent = "#1C4834";
+                    groundHighlight = "rgba(110, 231, 183, 0.22)";
+                }
+            } else {
+                // LIGHT THEME (Daylight Experience)
+                groundFar = "#7EBC9A";
+                groundNear = "#559672";
+                turfAccent = "#A8E2BF";
+                groundHighlight = "rgba(220, 252, 231, 0.65)";
+                moonAlpha = 0.0;
+                starsAlpha = 0.0;
+                fireflyAlpha = 0.0;
+
+                if (h >= 6.0 && h < 8.0) {
+                    // RADIANT DAWN / SUNRISE (6:00 AM - 8:00 AM)
+                    phase = "dawn";
+                    const progress = (h - 6.0) / 2.0;
+                    skyTop = "#98BBE3";
+                    skyMid = "#E3BFCE";
+                    skyBottom = "#FEF08A";
+                    sunColor = "#F59E0B";
+                    sunCorona = "rgba(251, 146, 60, 0.45)";
+                    sunAlpha = 0.85 + progress * 0.15;
+                    sunX = width * (0.16 + progress * 0.16);
+                    sunY = 115 - progress * 35;
+                    cloudTint = "rgba(255, 240, 235,";
+                    groundFar = "#74A88E";
+                    groundNear = "#4C8466";
+                    turfAccent = "#A2DFBC";
+                } else if (h >= 16.5 && h < 18.0) {
+                    // GOLDEN HOUR SUNSET (4:30 PM - 6:00 PM)
+                    phase = "golden-hour";
+                    const progress = (h - 16.5) / 1.5;
+                    skyTop = "#5A7BA6";
+                    skyMid = "#F3B29A";
+                    skyBottom = "#FED7AA";
+                    sunColor = "#F97316";
+                    sunCorona = "rgba(251, 146, 60, 0.55)";
+                    sunAlpha = 0.95;
+                    sunX = width * (0.72 + progress * 0.12);
+                    sunY = 80 + progress * 40;
+                    cloudTint = "rgba(255, 225, 200,";
+                    groundFar = "#689A82";
+                    groundNear = "#447860";
+                    turfAccent = "#9AE0B8";
+                    groundHighlight = "rgba(254, 215, 170, 0.65)";
+                } else {
+                    // BRIGHT DAYLIGHT / NOON (8:00 AM - 4:30 PM) or Manual Light Mode during night
+                    phase = "day";
+                    skyTop = "#3B82F6";
+                    skyMid = "#93C5FD";
+                    skyBottom = "#EFF6FF";
+                    sunAlpha = 1.0;
+                    sunColor = "#FBBF24";
+                    sunCorona = "rgba(253, 230, 138, 0.5)";
+                    // Smooth solar arc across canvas
+                    if (h >= 8.0 && h < 16.5) {
+                        const progress = (h - 8.0) / 8.5;
+                        sunX = width * (0.28 + progress * 0.44);
+                        sunY = 90 - Math.sin(progress * Math.PI) * 45;
+                    } else {
+                        sunX = width * 0.5;
+                        sunY = 75;
+                    }
+                    cloudTint = "rgba(255, 255, 255,";
+                    groundFar = "#7EBC9A";
+                    groundNear = "#559672";
+                    turfAccent = "#A8E2BF";
+                    groundHighlight = "rgba(220, 252, 231, 0.70)";
+                }
             }
 
             return {
@@ -2770,8 +3043,41 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeProfileModal);
     if (modalBackdrop) modalBackdrop.addEventListener("click", closeProfileModal);
 
+    /* ==========================================================================
+       Interactive Verified Resume Viewer Modal (Inspect before download)
+       ========================================================================== */
+    const resumeViewerModal = document.getElementById("resume-viewer-modal");
+    const resumeModalBackdrop = document.getElementById("resume-modal-backdrop");
+    const resumeModalCloseBtn = document.getElementById("resume-modal-close-btn");
+    const heroViewResumeBtn = document.getElementById("hero-view-resume-btn");
+
+    function openResumeViewer() {
+        if (!resumeViewerModal) return;
+        soundFX.select();
+        resumeViewerModal.classList.add("is-open");
+        resumeViewerModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        if (resumeModalCloseBtn) {
+            setTimeout(() => resumeModalCloseBtn.focus(), 50);
+        }
+    }
+
+    function closeResumeViewer() {
+        if (!resumeViewerModal) return;
+        resumeViewerModal.classList.remove("is-open");
+        resumeViewerModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    if (heroViewResumeBtn) heroViewResumeBtn.addEventListener("click", openResumeViewer);
+    if (resumeModalCloseBtn) resumeModalCloseBtn.addEventListener("click", closeResumeViewer);
+    if (resumeModalBackdrop) resumeModalBackdrop.addEventListener("click", closeResumeViewer);
+
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+            if (resumeViewerModal && resumeViewerModal.classList.contains("is-open")) {
+                closeResumeViewer();
+            }
             if (profileModal && profileModal.classList.contains("is-open")) {
                 closeProfileModal();
             }
@@ -3273,8 +3579,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         requestAnimationFrame(animateFlowerCursor);
 
-        const interactiveSelector = "a, button, input, textarea, select, [role='button'], .card-frame, .dock-btn, .shortcut-pill, .branch-tag, .skill-tag, .tag-pill";
-        const ctaSelector = "a, button, input, textarea, select, [role='button'], .dock-btn, .copy-btn, .modal-cta-btn, .tag-pill, .branch-tag, .skill-tag, .shortcut-pill, .garden-floating-dock, .mobile-nav-drawer, .modal-card, .term-input-field";
+        const interactiveSelector = "a, button, input, textarea, select, [role='button'], .card-frame, .dock-btn, .shortcut-pill, .branch-tag, .skill-tag, .tag-pill, .ctx-menu-item";
+        const ctaSelector = "a, button, input, textarea, select, [role='button'], .dock-btn, .copy-btn, .modal-cta-btn, .tag-pill, .branch-tag, .skill-tag, .shortcut-pill, .garden-floating-dock, .mobile-nav-drawer, .modal-card, .term-input-field, .garden-context-menu, .ctx-menu-item";
 
         document.addEventListener("mouseover", (e) => {
             if (e.target.closest(interactiveSelector)) {
@@ -3300,6 +3606,118 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.addEventListener("pointerup", () => {
             cursorRoot.classList.remove("is-clicking");
+        });
+    }
+
+    /* ==========================================================================
+       Bespoke Right-Click Custom Context Menu (Resume Download & Social Handles)
+       ========================================================================== */
+    const contextMenu = document.getElementById("custom-context-menu");
+    if (contextMenu) {
+        window.addEventListener("contextmenu", (e) => {
+            // Do not override if user is right-clicking inside an input/textarea
+            if (e.target.closest("input, textarea")) return;
+
+            e.preventDefault();
+
+            // Ensure living flower cursor stays visibly active above the context menu
+            if (cursorRoot) {
+                cursorRoot.classList.add("is-active");
+            }
+
+            // Make visible to measure dimensions accurately
+            contextMenu.hidden = false;
+            contextMenu.classList.add("is-active");
+
+            // Smart collision avoidance
+            const menuWidth = contextMenu.offsetWidth || 265;
+            const menuHeight = contextMenu.offsetHeight || 380;
+            const padding = 16;
+
+            let x = e.clientX;
+            let y = e.clientY;
+
+            if (x + menuWidth > window.innerWidth - padding) {
+                x = Math.max(padding, window.innerWidth - menuWidth - padding);
+            }
+            if (y + menuHeight > window.innerHeight - padding) {
+                y = Math.max(padding, window.innerHeight - menuHeight - padding);
+            }
+
+            contextMenu.style.left = `${x}px`;
+            contextMenu.style.top = `${y}px`;
+
+            if (soundFX && typeof soundFX.softClick === "function") {
+                soundFX.softClick();
+            }
+        });
+
+        function closeContextMenu() {
+            if (!contextMenu.hidden && contextMenu.classList.contains("is-active")) {
+                contextMenu.classList.remove("is-active");
+                setTimeout(() => {
+                    if (!contextMenu.classList.contains("is-active")) {
+                        contextMenu.hidden = true;
+                    }
+                }, 160);
+            }
+        }
+
+        window.addEventListener("click", (e) => {
+            if (!contextMenu.contains(e.target)) {
+                closeContextMenu();
+            }
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeContextMenu();
+            }
+        });
+
+        window.addEventListener("scroll", closeContextMenu, { passive: true });
+        window.addEventListener("resize", closeContextMenu, { passive: true });
+
+        // Connect quick actions inside custom context menu
+        const ctxResumeView = document.getElementById("ctx-resume-view");
+        if (ctxResumeView) {
+            ctxResumeView.addEventListener("click", () => {
+                closeContextMenu();
+                openResumeViewer();
+            });
+        }
+
+        const ctxMusicToggle = document.getElementById("ctx-toggle-music");
+        if (ctxMusicToggle) {
+            ctxMusicToggle.addEventListener("click", () => {
+                closeContextMenu();
+                setSoundState(!soundEnabled, "dilne");
+                openMusicDrawer();
+            });
+        }
+
+        const ctxThemeToggle = document.getElementById("ctx-toggle-theme");
+        if (ctxThemeToggle) {
+            ctxThemeToggle.addEventListener("click", () => {
+                closeContextMenu();
+                const deckBtn = document.getElementById("theme-toggle-btn");
+                if (deckBtn) deckBtn.click();
+            });
+        }
+
+        const ctxIdentityToggle = document.getElementById("ctx-toggle-identity");
+        if (ctxIdentityToggle) {
+            ctxIdentityToggle.addEventListener("click", () => {
+                closeContextMenu();
+                const snapshotBtn = document.getElementById("header-snapshot-btn");
+                if (snapshotBtn) snapshotBtn.click();
+            });
+        }
+
+        contextMenu.querySelectorAll(".ctx-menu-item").forEach((item) => {
+            item.addEventListener("click", () => {
+                closeContextMenu();
+            });
         });
     }
 });

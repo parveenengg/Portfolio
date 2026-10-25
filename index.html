@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,28 @@
     <title>Parveen Makwana (Parveen Kumar) — The Living Garden &bull; Software Engineering Portfolio</title>
     <meta name="description"
         content="The Living Garden Portfolio of Parveen Makwana (Parveen Kumar) — Software Engineer based in Rohtak, Haryana, building cross-platform engines (Flutter/Dart), backend APIs (Node/Express/MongoDB), and Python data tools.">
+
+    <!-- Automatic Time-Based Theme (Evening/Night 18:00–06:00 => Dark, Daytime 06:00–18:00 => Light, with Manual CTA Override) -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem("parveen_theme_pref");
+                if (saved === "light" || saved === "dark") {
+                    document.documentElement.setAttribute("data-theme", saved);
+                } else {
+                    // Compute Rohtak IST time (UTC+5:30)
+                    const now = new Date();
+                    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                    const istHours = new Date(utc + (3600000 * 5.5)).getHours();
+                    // Evening or Night (6:00 PM to 6:00 AM) => Dark Theme; Daytime => Light Mode
+                    const isEveningOrNight = istHours >= 18 || istHours < 6;
+                    document.documentElement.setAttribute("data-theme", isEveningOrNight ? "dark" : "light");
+                }
+            } catch (e) {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
 
     <!-- Google Fonts: Instrument Serif, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,6 +146,92 @@
             <span class="clock-pin-icon">&bull;</span>
             <span class="clock-display-text" id="dock-clock-display">--:--:-- IST</span>
         </div>
+
+        <!-- FLIGHT DECK MUSIC CAPSULE & TRACK SELECTOR (Dil Ne Yeh Kaha - Udit Narayan & Alka Yagnik) -->
+        <div class="music-capsule-drawer" id="music-capsule-drawer" aria-hidden="true" role="dialog" aria-label="Music Player &amp; Audio Deck">
+            <div class="card-corner-motif top-left"></div>
+            <div class="card-corner-motif top-right"></div>
+            
+            <div class="music-drawer-header">
+                <div class="music-hdr-left">
+                    <span class="music-pulse-dot" id="music-pulse-indicator"></span>
+                    <span class="music-drawer-title">Audio Flight Deck</span>
+                </div>
+                <button type="button" class="music-drawer-close" id="music-drawer-close" aria-label="Close music player">&times;</button>
+            </div>
+
+            <!-- Parveen's Personal Favourite Highlight Banner -->
+            <div class="music-fav-banner">
+                <span class="fav-badge-star">⭐</span>
+                <div class="fav-banner-text">
+                    <span class="fav-tag">PARVEEN'S PERSONAL FAVOURITE</span>
+                    <strong class="fav-title">"Dil Ne Yeh Kaha Hain Dil Se" &mdash; Udit Narayan &amp; Alka Yagnik</strong>
+                </div>
+            </div>
+
+            <!-- YouTube Video & Live Audio Visualizer Embed -->
+            <div class="music-embed-container" id="music-embed-container">
+                <iframe id="music-yt-frame"
+                    src="https://www.youtube-nocookie.com/embed/MFommhp4XVk?enablejsapi=1&origin=http://localhost:8000"
+                    title="Dil Ne Yeh Kaha Hain Dil Se - Udit Narayan &amp; Alka Yagnik (Dhadkan)"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Track Switcher & Playlist -->
+            <div class="music-tracks-list">
+                <div class="music-track-item is-selected" id="track-item-dilne" data-track="dilne" role="button" tabindex="0">
+                    <div class="track-play-badge">
+                        <span class="track-icon">💖</span>
+                    </div>
+                    <div class="track-meta">
+                        <div class="track-title-row">
+                            <strong class="track-title">Dil Ne Yeh Kaha Hain Dil Se</strong>
+                            <span class="track-fav-pill">⭐ Favourite</span>
+                        </div>
+                        <span class="track-artist">Udit Narayan &bull; Alka Yagnik</span>
+                        <span class="track-genre">Romantic Classic &bull; Dhadkan</span>
+                    </div>
+                    <div class="track-status-indicator">
+                        <span class="track-eq-bars" id="eq-dilne">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="music-track-item" id="track-item-chimes" data-track="chimes" role="button" tabindex="0">
+                    <div class="track-play-badge">
+                        <span class="track-icon">🌿</span>
+                    </div>
+                    <div class="track-meta">
+                        <div class="track-title-row">
+                            <strong class="track-title">Garden Chimes</strong>
+                            <span class="track-calm-pill">Acoustic</span>
+                        </div>
+                        <span class="track-artist">Generative Kalimba Motifs</span>
+                        <span class="track-genre">Peaceful Nature Chimes</span>
+                    </div>
+                    <div class="track-status-indicator">
+                        <span class="track-eq-bars" id="eq-chimes">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls Deck -->
+            <div class="music-controls-footer">
+                <button type="button" class="music-primary-play-btn" id="music-main-play-btn">
+                    <span id="music-main-play-icon">▶</span>
+                    <span id="music-main-play-txt">Play Dil Ne Yeh Kaha</span>
+                </button>
+                <a href="https://www.youtube.com/watch?v=MFommhp4XVk" target="_blank" rel="noopener" class="music-external-link" title="Open Dil Ne Yeh Kaha on YouTube">
+                    <span>YouTube</span> &nearr;
+                </a>
+            </div>
+        </div>
     </header>
 
     <!-- MAIN GARDEN CONTENT FLOW -->
@@ -179,7 +287,12 @@
 
                     <!-- Action Triggers -->
                     <div class="hero-actions-cluster">
-                        <a href="#projects" class="garden-btn btn-leaf-primary">
+                        <button type="button" class="garden-btn btn-leaf-primary" id="hero-view-resume-btn" aria-label="View Parveen's Original Resume">
+                            <span class="btn-icon">📄</span>
+                            <span>View Resume</span>
+                            <span class="btn-badge">PDF</span>
+                        </button>
+                        <a href="#projects" class="garden-btn btn-petal-ghost">
                             <span class="btn-icon">⚡</span>
                             <span>Featured Projects</span>
                             <span class="btn-arrow">&darr;</span>
@@ -277,6 +390,7 @@
                             <h3 class="project-heading">Orbit &mdash; Cross-Platform Browser</h3>
 
                             <div class="project-tech-stack">
+                                <span class="skill-tag highlight-skill">2025 &ndash; 2026</span>
                                 <span class="skill-tag highlight-skill">Flutter</span>
                                 <span class="skill-tag highlight-skill">Dart</span>
                                 <span class="skill-tag">SQLite</span>
@@ -312,6 +426,7 @@
                             <h3 class="project-heading">Obvious-Choice &mdash; Founder Digital Platform</h3>
 
                             <div class="project-tech-stack">
+                                <span class="skill-tag highlight-skill">2025 &ndash; 2026</span>
                                 <span class="skill-tag highlight-skill">Vanilla JS</span>
                                 <span class="skill-tag highlight-skill">Modern CSS</span>
                                 <span class="skill-tag">HTML5</span>
@@ -498,7 +613,7 @@
                 <!-- Reverse Chronological Timeline Track Container -->
                 <div class="growth-pathway-vine">
 
-                    <!-- Milestone 01: Obvious-Choice Live Platform (Active Now) -->
+                    <!-- Milestone 01: Obvious-Choice Live Platform (2025 - 2026, Built during B.Tech) -->
                     <div class="vine-node-item node-in-progress">
                         <div class="vine-blossom-marker blossom-active"
                             title="Active: Obvious-Choice Live Platform">
@@ -509,16 +624,16 @@
                             <div class="card-corner-motif top-left"></div>
                             <div class="node-meta-head">
                                 <div class="node-badge-cluster">
-                                    <span class="node-year-badge">2025 &ndash; PRESENT</span>
+                                    <span class="node-year-badge">2025 &ndash; 2026</span>
                                     <span class="node-track-badge badge-experience">ACTIVE PLATFORM &bull; PRODUCTION</span>
                                 </div>
-                                <span class="node-place">Public Web Platform</span>
+                                <span class="node-place">Public Web Platform &bull; Built during B.Tech</span>
                             </div>
                             <h3 class="node-headline">Obvious-Choice &mdash; Founder Digital Platform</h3>
                             <p class="node-summary">
                                 Engineered a zero-dependency high-conversion web presence system for founders, achieving
                                 99+ Google Lighthouse scores and fluid typography using pure native HTML5, CSS3, and
-                                JavaScript.
+                                JavaScript. Built and shipped during B.Tech studies.
                             </p>
                             <div class="node-skill-tags">
                                 <span>Vanilla Web</span> <span>Lighthouse 99+</span> <span>CSS Grid</span>
@@ -530,7 +645,37 @@
                         </div>
                     </div>
 
-                    <!-- Milestone 02: University Degree at MDU Rohtak (Active Degree Pursuit) -->
+                    <!-- Milestone 02: Orbit Browser Solo Sprint Deployment (2025 - 2026, Built during B.Tech) -->
+                    <div class="vine-node-item node-in-progress">
+                        <div class="vine-blossom-marker blossom-active" title="Milestone 02: Orbit Browser Sprint">
+                            <span class="blossom-marker-icon">🪐</span>
+                        </div>
+                        <div class="vine-content-card card-frame is-highlighted"
+                            onclick="window.portfolioStageEngine.openMilestoneModal('orbit-sprint');">
+                            <div class="card-corner-motif top-left"></div>
+                            <div class="node-meta-head">
+                                <div class="node-badge-cluster">
+                                    <span class="node-year-badge">2025 &ndash; 2026</span>
+                                    <span class="node-track-badge badge-projects">PROJECT DEPLOYMENT &bull; PRODUCTION APK</span>
+                                </div>
+                                <span class="node-place">Mobile Client Engine &bull; Built during B.Tech</span>
+                            </div>
+                            <h3 class="node-headline">Orbit Browser MVP Engineering Sprint</h3>
+                            <p class="node-summary">
+                                Designed and shipped a cross-platform mobile browser MVP in Flutter and Dart during B.Tech
+                                studies. Implemented tab virtualization, SQLite history persistence, and released
+                                production Android APKs.
+                            </p>
+                            <div class="node-skill-tags">
+                                <span>Flutter</span> <span>Dart</span> <span>SQLite</span> <span>Android APK</span>
+                            </div>
+                            <button type="button" class="node-explore-link">
+                                <span>Inspect Milestone Log &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 03: University Degree at MDU Rohtak (Active Degree Pursuit) -->
                     <div class="vine-node-item node-in-progress">
                         <div class="vine-blossom-marker blossom-active" title="Degree Pursuit: B.Tech Computer Science">
                             <span class="blossom-marker-icon">🌸</span>
@@ -549,41 +694,12 @@
                             <h3 class="node-headline">B.Tech Computer Science &amp; Engineering</h3>
                             <p class="node-summary">
                                 Advancing theoretical and applied computer science: distributed architectures, database
-                                internals, algorithmic optimization, and enterprise software engineering methodologies.
+                                internals, algorithmic optimization, and enterprise software engineering. Engineered
+                                production platforms and client apps (Orbit Browser &amp; Obvious-Choice) alongside academic rigor.
                             </p>
                             <div class="node-skill-tags">
                                 <span>Distributed Systems</span> <span>Database Architecture</span> <span>Software
                                     Engineering</span>
-                            </div>
-                            <button type="button" class="node-explore-link">
-                                <span>Inspect Milestone Log &rarr;</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Milestone 03: Orbit Browser Solo Sprint Deployment -->
-                    <div class="vine-node-item node-completed">
-                        <div class="vine-blossom-marker" title="Milestone 03: Orbit Browser Sprint">
-                            <span class="blossom-marker-icon">🪐</span>
-                        </div>
-                        <div class="vine-content-card card-frame"
-                            onclick="window.portfolioStageEngine.openMilestoneModal('orbit-sprint');">
-                            <div class="card-corner-motif top-left"></div>
-                            <div class="node-meta-head">
-                                <div class="node-badge-cluster">
-                                    <span class="node-year-badge">2024 &ndash; 2025</span>
-                                    <span class="node-track-badge badge-projects">PROJECT DEPLOYMENT</span>
-                                </div>
-                                <span class="node-place">Independent Software Sprint</span>
-                            </div>
-                            <h3 class="node-headline">Orbit Browser MVP Engineering Sprint</h3>
-                            <p class="node-summary">
-                                Designed and shipped a cross-platform mobile browser MVP in Flutter and Dart within 14
-                                days. Implemented tab virtualization, SQLite history persistence, and released
-                                production Android APKs.
-                            </p>
-                            <div class="node-skill-tags">
-                                <span>Flutter</span> <span>Dart</span> <span>SQLite</span> <span>Android APK</span>
                             </div>
                             <button type="button" class="node-explore-link">
                                 <span>Inspect Milestone Log &rarr;</span>
@@ -891,6 +1007,10 @@
                         <span class="m-k">Direct Frequency</span>
                         <span class="m-v">parveenmakwana02@gmail.com</span>
                     </div>
+                    <div class="m-spec highlight-music-row">
+                        <span class="m-k">Favourite Music</span>
+                        <span class="m-v highlight-jade"><strong>Dil Ne Yeh Kaha Hain Dil Se</strong> &mdash; Udit Narayan &amp; Alka Yagnik 💖 <span class="track-fav-pill">⭐ Personal Favourite</span></span>
+                    </div>
                 </div>
                 <div class="modal-cta-row">
                     <a href="https://linkedin.com/in/parveenkumar--/" target="_blank" rel="noopener"
@@ -974,6 +1094,172 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- =================================================================
+         INTERACTIVE RESUME VIEWER MODAL (Full 1-Page Original PDF Viewer)
+         ================================================================= -->
+    <div class="resume-modal" id="resume-viewer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+        <div class="resume-modal-backdrop" id="resume-modal-backdrop"></div>
+        <div class="resume-modal-window card-frame">
+            <div class="card-corner-motif top-left"></div>
+            <div class="card-corner-motif top-right"></div>
+            <div class="card-corner-motif bottom-left"></div>
+            <div class="card-corner-motif bottom-right"></div>
+
+            <div class="terminal-window-bar">
+                <div class="window-controls" aria-hidden="true">
+                    <span class="ctrl-dot dot-red"></span>
+                    <span class="ctrl-dot dot-yellow"></span>
+                    <span class="ctrl-dot dot-green"></span>
+                </div>
+                <span class="terminal-bar-title" id="resume-modal-title">document // Parveen_Kumar_Resume.pdf</span>
+                <span class="terminal-bar-badge status-active">● 1-PAGE VERIFIED</span>
+            </div>
+
+            <div class="resume-modal-toolbar">
+                <div class="resume-meta-info">
+                    <span class="resume-badge-pdf">PDF</span>
+                    <strong class="resume-name-hdr">Parveen Kumar &bull; Software Engineer</strong>
+                    <span class="resume-deg-tag">B.Tech CSE '27</span>
+                </div>
+                <div class="resume-toolbar-actions">
+                    <a href="assets/Parveen_Makwana_Resume.pdf" target="_blank" rel="noopener" class="resume-tool-btn" title="Open full PDF in a new browser tab">
+                        <span>New Tab</span> &nearr;
+                    </a>
+                    <a href="assets/Parveen_Makwana_Resume.pdf" download="Parveen_Kumar_Resume.pdf" class="resume-tool-btn resume-btn-download" title="Download original PDF to your computer">
+                        <span>Download</span> &darr;
+                    </a>
+                    <button type="button" class="modal-close-btn" id="resume-modal-close-btn" aria-label="Close resume viewer">&times;</button>
+                </div>
+            </div>
+
+            <div class="resume-frame-wrapper">
+                <iframe src="assets/Parveen_Makwana_Resume.pdf#toolbar=1&navpanes=0&scrollbar=1" 
+                    id="resume-pdf-iframe" 
+                    class="resume-pdf-iframe" 
+                    title="Parveen Kumar Original Resume PDF">
+                </iframe>
+                <div class="resume-mobile-fallback" id="resume-mobile-fallback">
+                    <p class="resume-mobile-msg">Previewing on mobile or browser without embedded PDF? View or download directly:</p>
+                    <div class="resume-fallback-btns">
+                        <a href="assets/Parveen_Makwana_Resume.pdf" target="_blank" rel="noopener" class="garden-btn btn-leaf-primary">
+                            <span>Open Resume in Browser Viewer &nearr;</span>
+                        </a>
+                        <a href="assets/Parveen_Makwana_Resume.pdf" download="Parveen_Kumar_Resume.pdf" class="garden-btn btn-petal-ghost">
+                            <span>Download PDF Directly &darr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BESPOKE CUSTOM RIGHT-CLICK CONTEXT MENU -->
+    <div id="custom-context-menu" class="garden-context-menu card-frame" aria-label="Quick Actions Context Menu" role="menu" hidden>
+        <div class="card-corner-motif top-left"></div>
+        <div class="card-corner-motif top-right"></div>
+        <div class="card-corner-motif bottom-left"></div>
+        <div class="card-corner-motif bottom-right"></div>
+
+        <div class="ctx-menu-header">
+            <span class="ctx-avatar-icon">🌸</span>
+            <div class="ctx-header-info">
+                <span class="ctx-header-name">Parveen Makwana</span>
+                <span class="ctx-header-role">Software Engineer &bull; Rohtak</span>
+            </div>
+        </div>
+
+        <div class="ctx-divider"></div>
+
+        <!-- 1. View Resume Option (Inspect Before Downloading) -->
+        <button type="button" class="ctx-menu-item ctx-item-featured" role="menuitem" id="ctx-resume-view">
+            <span class="ctx-icon">📄</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">View Resume</span>
+                <span class="ctx-badge">1-Page PDF &bull; Verified</span>
+            </div>
+            <span class="ctx-action-arrow">&nearr;</span>
+        </button>
+
+        <a href="assets/Parveen_Makwana_Resume.pdf" download="Parveen_Kumar_Resume.pdf" class="ctx-menu-item" role="menuitem" id="ctx-resume-download">
+            <span class="ctx-icon">💾</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">Download PDF Directly</span>
+                <span class="ctx-sub">Parveen_Kumar_Resume.pdf</span>
+            </div>
+            <span class="ctx-action-arrow">&darr;</span>
+        </a>
+
+        <div class="ctx-divider"></div>
+
+        <!-- 2. Social Handles Group -->
+        <div class="ctx-group-title">VERIFIED DIGITAL HANDLES</div>
+
+        <a href="https://linkedin.com/in/parveenkumar--/" target="_blank" rel="noopener" class="ctx-menu-item" role="menuitem">
+            <span class="ctx-icon ctx-icon-linkedin">💼</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">LinkedIn</span>
+                <span class="ctx-sub">parveenkumar--</span>
+            </div>
+            <span class="ctx-action-arrow">&nearr;</span>
+        </a>
+
+        <a href="https://github.com/parveenengg" target="_blank" rel="noopener" class="ctx-menu-item" role="menuitem">
+            <span class="ctx-icon ctx-icon-github">🐙</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">GitHub</span>
+                <span class="ctx-sub">parveenengg</span>
+            </div>
+            <span class="ctx-action-arrow">&nearr;</span>
+        </a>
+
+        <a href="https://leetcode.com/u/parveen_engi/" target="_blank" rel="noopener" class="ctx-menu-item" role="menuitem">
+            <span class="ctx-icon ctx-icon-leetcode">⚡</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">LeetCode</span>
+                <span class="ctx-sub">parveen_engi</span>
+            </div>
+            <span class="ctx-action-arrow">&nearr;</span>
+        </a>
+
+        <a href="mailto:parveenmakwana02@gmail.com" class="ctx-menu-item" role="menuitem">
+            <span class="ctx-icon">✉️</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">Direct Email</span>
+                <span class="ctx-sub">parveenmakwana02</span>
+            </div>
+            <span class="ctx-action-arrow">&nearr;</span>
+        </a>
+
+        <div class="ctx-divider"></div>
+
+        <!-- 3. Music Quick Trigger -->
+        <button type="button" class="ctx-menu-item" id="ctx-toggle-music" role="menuitem">
+            <span class="ctx-icon" id="ctx-music-icon">🎵</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label" id="ctx-music-title">Play "Dil Ne Yeh Kaha"</span>
+                <span class="ctx-sub" id="ctx-music-sub">Udit Narayan &bull; Alka Yagnik (Parveen's Favourite ⭐)</span>
+            </div>
+            <span class="ctx-badge">Music</span>
+        </button>
+
+        <!-- 4. Site Theme Controls -->
+        <button type="button" class="ctx-menu-item" id="ctx-toggle-theme" role="menuitem">
+            <span class="ctx-icon" id="ctx-theme-icon">🌓</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label" id="ctx-theme-title">Switch Theme</span>
+                <span class="ctx-sub" id="ctx-theme-sub">Light / Dark</span>
+            </div>
+        </button>
+
+        <button type="button" class="ctx-menu-item" id="ctx-toggle-identity" role="menuitem">
+            <span class="ctx-icon">🌿</span>
+            <div class="ctx-item-text">
+                <span class="ctx-label">Legal Identity Record</span>
+                <span class="ctx-sub">Parveen Kumar</span>
+            </div>
+        </button>
     </div>
 
     <script src="script.js"></script>
